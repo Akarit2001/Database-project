@@ -16,3 +16,9 @@ body {
     border:0px;
     color: white;
 }
+a{
+    text-decoration:none;
+}
+.back-btn{
+    padding: 10px 50px;
+}
