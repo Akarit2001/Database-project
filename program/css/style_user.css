@@ -4,8 +4,75 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 ***/
 
+/* ============ Start Basket ============ */
+/* for basket */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+  color:#211a1a;
+  font-size: 0.9em;
+}
+
+/* Area basket */
+.basket {
+  background-color: #f6f9fb;
+  margin: 0;
+  padding: 0;
+  width: 75%;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+  transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+  border: 0;
+  border-radius: 1rem;
+}
+
+.basket table{
+  background-color: #e7ecf1;
+}
+
+.table-basket{
+  border-collapse: collapse;
+  width: 100%;
+}
+/* table basket */
+.table-basket, tr, th, td{
+  border: #d3d2d2 1px solid;
+  font-size: 0.4cm;
+}
+
+td{
+  height: 20px;
+}
+
+
+.text-header{
+  padding: 10px;
+  color:#0676f7;
+  width: 100%;
+  border-bottom: 1px solid #f0f4f7;
+}
+
+#btnEmpty{
+  background-color: #e7ecf1;
+  padding: 5px 10px;
+  float: right;
+  text-decoration: none;
+  border-radius: 2px;
+  margin: 10px 0;
+  font-size: 0.3cm;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+  transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+  border: 0;
+  border-radius: 1rem;
+}
+
+/* End basket */
+/* =================================== */
+
+/* End */
 body {
-  background: #F1F3FA;
+  background: #e4e4e4;
 }
 
 /* Profile container */
@@ -16,6 +83,10 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px 0 10px 0;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+  transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+  border: 0;
+  border-radius: 1rem;
   background: #fff;
 }
 
@@ -46,7 +117,31 @@ body {
   color: #5b9bd1;
   font-size: 12px;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
+}
+
+.profile-usertitle-phone {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.profile-usertitle-address {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.profile-usertitle-gmail {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
 }
 
 .profile-userbuttons {
@@ -111,129 +206,3 @@ body {
   background: #fff;
   min-height: 460px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
-  -webkit-border-radius: 0 !important;
-  -moz-border-radius: 0 !important;
-  border-radius: 0 !important;
-}
-
-.dashboard-stat, .portlet {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-}
-
-.portlet {
-  margin-top: 0;
-  margin-bottom: 25px;
-  padding: 0;
-  border-radius: 4px;
-}
-
-.portlet.bordered {
-  border-left: 2px solid #e6e9ec !important;
-}
-
-.portlet.light {
-  padding: 12px 20px 15px;
-  background-color: #fff;
-}
-
-.portlet.light.bordered {
-  border: 1px solid #e7ecf1 !important;
-}
-
-.list-separated {
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.profile-stat {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f0f4f7;
-}
-
-.profile-stat-title {
-  color: #7f90a4;
-  font-size: 25px;
-  text-align: center;
-}
-
-.uppercase {
-  text-transform: uppercase !important;
-}
-
-.profile-stat-text {
-  color: #5b9bd1;
-  font-size: 10px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.profile-desc-title {
-  color: #7f90a4;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.profile-desc-text {
-  color: #7e8c9e;
-  font-size: 14px;
-}
-
-.margin-top-20 {
-  margin-top: 20px !important;
-}
-
-[class*=" fa-"]:not(.fa-stack), [class*=" glyphicon-"], [class*=" icon-"], [class^=fa-]:not(.fa-stack), [class^=glyphicon-], [class^=icon-] {
-  display: inline-block;
-  line-height: 14px;
-  -webkit-font-smoothing: antialiased;
-}
-
-.profile-desc-link i {
-  width: 22px;
-  font-size: 19px;
-  color: #abb6c4;
-  margin-right: 5px;
-}
-.row{
-  margin-top:10px;
-  background-color: rgb(0, 201, 107);
-  padding:10px;
-}
-.box{
-  /* width: 20%; */
-  height: 350px;
-  background-color:black;
-  margin:20px;
-}
-/* .content{
-  margin-top:20px;
-  padding: 50px 20px;
-} */
-
