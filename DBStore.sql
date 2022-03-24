@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2022 at 07:04 PM
+-- Generation Time: Mar 24, 2022 at 07:08 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.28
 
@@ -20,17 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `DBStore`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `addProduct`
---
-
-CREATE TABLE `addProduct` (
-  `aId` int(4) NOT NULL,
-  `addAmount` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -102,12 +91,6 @@ CREATE TABLE `seller` (
 --
 
 --
--- Indexes for table `addProduct`
---
-ALTER TABLE `addProduct`
-  ADD PRIMARY KEY (`aId`);
-
---
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -134,12 +117,6 @@ ALTER TABLE `seller`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `addProduct`
---
-ALTER TABLE `addProduct`
-  MODIFY `aId` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer`
