@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $total_price = 0;
     foreach($_SESSION["bill"] as $bill){
         echo "Name : ".$bill['pname'];
         echo "</br>";

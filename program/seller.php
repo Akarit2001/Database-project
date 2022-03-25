@@ -48,9 +48,9 @@ echo isset($_POST["pname"]);
 if (isset($_POST["pname"]) && isset($_POST["price"])) {
     $pname = $_POST["pname"];
     $price = $_POST["price"];
-    $pamout = 0;
-    $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamout);
-    $sqlInsert = "INSERT INTO product (sid,pname, pprice,pamout) VALUES " . $mstr;
+    $pamount = 0;
+    $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamount );
+    $sqlInsert = "INSERT INTO product (sid,pname, pprice,pamount ) VALUES " . $mstr;
     if ($conn->query($sqlInsert)) {
         header("Refresh:0; url=seller.php"); //reload page
     }
@@ -59,13 +59,13 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
 // echo isset($_POST["apid"]);
 if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apid = $_POST["apid"];
-    $apamout = $_POST["addamout"];
-    $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamout);
+    $apamount = $_POST["addamout"];
+    $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount );
     $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmout) VALUES " . $mstr;
-    // $tempAmout = 0;
+    // $tempamount = 0;
     $getoldAmout = "select * form product WHERE pid = '" . $apid . "';";
 
-    $sqlAlt_product = "UPDATE product SET pamout = pamout+" . $apamout . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
+    $sqlAlt_product = "UPDATE product SET pamount = pamount +" . $apamount . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
     if ($conn->query($sqlAdd_addproduct) && $conn->query($sqlAlt_product)) {
         header("Refresh:0; url=seller.php"); //reload page
     }
@@ -202,7 +202,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                             if ($result->num_rows > 0) {
                                 // output data of each row
                                 while ($row = $result->fetch_assoc()) {
-                                    $str = '<p class="product_list">' . 'pid: ' . $row['pid'] . ' Pname: ' . $row['pname'] . ' Pprice: ' . $row['pprice'] . ' pAmout: ' . $row['pamout'] . '</p>';
+                                    $str = '<p class="product_list">' . 'pid: ' . $row['pid'] . ' Pname: ' . $row['pname'] . ' Pprice: ' . $row['pprice'] . ' pamount : ' . $row['pamount'] . '</p>';
                                     echo $str;
                                 }
                             }

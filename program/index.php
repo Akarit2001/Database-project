@@ -35,7 +35,8 @@
                             <br>
                             <input class="form-control border-0" type="password" name="" placeholder="Type Your Password">
                             <br>
-                            <input class="btn btn-primary btn-sm border-0 " type="submit" name="submitcus" value="Customer Sign In"></input>
+                            <a href="user.php">ssssssss</a>
+                            <a href="user.php"><input class="btn btn-primary btn-sm border-0 " type="submit" name="submitcus" value="Customer Sign In"></input></a>
                             <p class="forgot"><a href="">Forgot Password?</a></p>
                         </form>
                         <form class="text-center" action="./script/loginseller.php" method="POST">
