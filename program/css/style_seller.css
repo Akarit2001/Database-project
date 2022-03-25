@@ -107,12 +107,24 @@ body {
 
 /* Profile Content */
 .profile-content {
-    padding: 20px;
+    
+    padding: 30px;
     background: #fff;
-    min-height: 460px;
+    min-height: 1000px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
-
-
+.interfaceproduct{
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 1em;
+    font-weight:bold;
+}
+.product_list{
+    padding: 5px;
+    border:2px solid royalblue;
+    color: black;
+}
 
 
 
@@ -220,4 +232,39 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     font-size: 19px;
     color: #abb6c4;
     margin-right: 5px;
+}
+
+
+/* form */
+/* .myform {
+    display: flex;
+} */
+
+.div_btn {
+    margin: 10px;
+}
+
+.mybtn {
+    width: 100px;
+    margin-left: 85%;
+}
+
+legend {
+    margin-bottom: 25 px;
+}
+
+.myselect {
+    margin-top: 30px;
+    width: 180px;
+    height: 33px;
+    background-color: rgb(255, 255, 255);
+    border: 1px thin black;
+}
+label{
+    padding: 2px 15px;
+}
+
+.mylist{
+    border: 1px solid black;
+    color:#5b9bd1;
 }
