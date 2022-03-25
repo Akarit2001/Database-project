@@ -1,11 +1,12 @@
 <?php
 
+// Credit Pantipan.
 class DBController {
 
     private $host = "127.0.0.1";
     private $user = "root";
     private $password = "";
-    private $database = "Database";
+    private $database = "mystore";
     private $conn ;
 
     function __construct(){

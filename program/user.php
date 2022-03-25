@@ -2,6 +2,45 @@
     session_start();
     require_once('dbcontroller.php');
     $db_handle = new DBController();
+    
+    if(!empty($_GET["action"])){
+        
+        switch($_GET["action"]){
+            // Add product to basket.
+            case "add" :
+                if(!empty($_POST["quantity"])){
+                    $productBypId = $db_handle->runQuery("SELECT * FROM product WHERE pid = '".$_GET["pid"]."'");
+                    $itemArray = array($productBypId[0]["pid"]=>(array( 'pid' => $productBypId[0]["pid"], 
+                                                                        'pname' => $productBypId[0]["pname"],
+                                                                        'pprice' => $productBypId[0]["pprice"],
+                                                                        'pamount' => $productBypId[0]["pamount"],
+                                                                        'quantity' => $_POST["quantity"])));
+                }
+                if(!empty($_SESSION["cart_item"])){
+                    if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
+                        foreach($_SESSION["cart_item"] as $k => $v){
+                            if($_GET["pid"] == $k){
+                                if(empty($_SESSION["cart_item"][$k]["quantity"])){
+                                    $_SESSION["cart_item"][$k]["quantity"] = 0;
+                                }
+                                $_SESSION["cart"][$k]["quantity"] += $_POST["quantity"];
+                            }
+                        }
+                    }else{
+                        $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
+                    }
+                }
+                else{
+                    $_SESSION["cart_item"] = $itemArray;
+                }
+                break;
+
+            // Empty product to basket.
+            case "empty":
+                unset($_SESSION["cart_item"]);
+                break;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -85,50 +124,49 @@
                         if(isset($_SESSION["cart_item"])){
                             $total_quantity = 0;
                             $total_price = 0;
-                        }
-                    ?>
-
-                    <?php
-                        foreach($_SESSION["cart_item"] as $item){
-                            $item_price = $item["quantity"] = $item["price"];
                     ?>
 
                     <table class="table-basket" cellpadding="10" cellspacting="1">
                         <tbody>
                             <tr>
-                                <th style="text-align: left;" width="15%">Name</th>
-                                <th style="text-align: left;" width="15%">Code</th>
+                                <th style="text-align: center;" width="15%">Name</th>
+                                <th style="text-align: center;" width="15%">Code</th>
                                 <th style="text-align: right;" width="15%">Amount</th>
                                 <th style="text-align: right;" width="15%">Unit Price</th>
-                                <th style="text-align: right;" width="15%">Price</th>
-                                <th style="text-align: center;" width="15%">Remove</th>
+                                <th style="text-align: center;" width="15%">Price</th>
                             </tr>
-
+                                <?php
+                                    foreach($_SESSION["cart_item"] as $item){
+                                        $item_price = $item["pprice"] * $item["quantity"];
+                                ?>
                             <tr>
-                                <td><img src="./product-images/product.png" style="width:10px;" class="cart-item-image" alt=""><<?php echo $item["pName"];?>/td>
-                                <td><?php echo $item["pId"];?></td>
-                                <td style="text-align: right;"><?php echo $item["pAmount"];?></td>
-                                <td style="text-align: right;"><?php echo $item["pPrice"] . " $";?></td>
-                                <td style="text-align: right;"><?php echo number_format($item["pPrice"]) . " $";?>/td>
-                                <td style="text-align: center;" href="user.php?action=remove&pId=<?php echo $item["pId"];?>"class="btnRemoveAction"><img src="delete.png" style="width: 10px" alt="Remove Item"></td>
+                                <td style="text-align: center;"><?php echo $item["pname"];?></td>
+                                <td style="text-align: center;"><?php echo $item["pid"];?></td>
+                                <td style="text-align: right;"><?php echo $item["quantity"];?></td>
+                                <td style="text-align: right;"><?php echo $item["pprice"] . " $";?></td>
+                                <td style="text-align: center;"><?php echo number_format($item_price,2) . " $";?></td>
                             </tr>
 
                             <?php
-                                $total_quantity += $item["pAmount"];
-                                $total_price += ($item["pPrice"] * $item["pAmount"]);
+                                $total_quantity += $item["quantity"];
+                                $total_price += ($item["pprice"] * $item["quantity"]);
+                              }
                             ?>
 
                             <tr>
-                                <td colspan="2" align="right">Total</td>
-                                <td align="right"><?php echo $total_quantity;?></td>
-                                <td align="right" colspan="2"><?php echo number_format($total_price, 2). "$";?></td>
+                                <td align="right" colspan="4">Total</td>
+                                <td align="center" colspan="1"><?php echo number_format($total_price, 2). "$";?></td>
                             </tr>
                         </tbody>
                     </table>
-                <
+                <?php
+                        }else{
+                ?>
+                    <div class="no-records">Your Cart is Empty</div>
                 <?php
                     }
                 ?>
+                <input type="submit" value="Confirm" name="save_data" class="table-basket-submit">
             </div>
         </div>
 
@@ -141,39 +179,40 @@
                     
                     <!-- All Product -->
                     <?php
-                        $product_array = $db_handle->runQuery("SELECT * FROM product ORDER BY pId ASC");
+                        $product_array = $db_handle->runQuery("SELECT * FROM product ORDER BY pid ASC");
                         if(!empty($product_array)){
                             foreach($product_array as $key => $value){
 
                     ?>
                     <div class="col hp">
                         <div class="card h-100 shadow-sm">
-                            <a href="#">
-                                <img src="https://m.media-amazon.com/images/I/81gK08T6tYL._AC_SL1500_.jpg"
-                                    class="card-img-top" alt="product.title" />
-                            </a>
+                            <form action="user.php?action=add&pid=<?php echo $product_array[$key]["pid"];?>" method="post">
 
                             <div class="card-body">
                                 <!-- Price Product -->
                                 <div class="clearfix mb-3">
-                                    <span class="float-start badge rounded-pill bg-success"><?php echo $product_array[$key]["pPrice"];?></span>
+                                    <span class="float-start badge rounded-pill bg-success"><?php echo $product_array[$key]["pprice"];?></span>
                                 </div>
                                 <!-- Name Product -->
                                 <h5 class="card-title">
-                                    <a ><?php echo $product_array[$key]["pName"];?></a>
+                                    <a ><?php echo $product_array[$key]["pname"];?></a>
                                 </h5>
                                 <!-- Amount Product -->
+                                <h5 class="amount-title">
+                                    <a >จำนวน <?php echo $product_array[$key]["pamount"];?></a>
+                                </h5>
                                 <h5 class="seller-title">
-                                    <a >จำนวน<?php echo $product_array[$key]["pAmount"];?></a>
+                                    <a >ร้าน <?php echo $product_array[$key]["sid"];?></a>
                                 </h5>
                                 <!-- Add Product to baskest -->
                                 <div class="d-grid gap-2 my-4">
 
                                     <input type="number" class="product-quantity" name="quantity" value="1" size="2">
-                                    <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+                                    <input type="submit" value="Add to cart"  class="btn btn-warning bold-btn"></a>
 
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
 
