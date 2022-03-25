@@ -1,11 +1,12 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+?>
 <?php
 
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "mystore";
-
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

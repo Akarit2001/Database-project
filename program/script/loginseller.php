@@ -3,7 +3,7 @@
 session_start();
 if (isset($_POST['sname'])) {
     //connection
-    $servername = "localhost";
+    $servername = "127.0.0.1";
     $username = "root";
     $password = "";
     $dbname = "mystore";
@@ -39,3 +39,4 @@ if (isset($_POST['sname'])) {
 } else {
     Header("Location: ../index.php"); //user & password incorrect back to login again
 }
+?>
