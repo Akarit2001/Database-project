@@ -8,7 +8,7 @@ body {
 .login-content {
 	max-width: 450px;
     width: 100%;
-    height: 550px;
+    height: 700px;
     z-index: 1;
     position: absolute;
     top: 50%;
@@ -93,3 +93,6 @@ body {
 .form-control:-ms-input-placeholder{
 	color: red;
 }
+/* .card-body{
+	height:6000px;
+} */
