@@ -3,12 +3,15 @@
     require_once('dbcontroller.php');
     $db_handle = new DBController();
     
+    // if It isn't empty of action.
     if(!empty($_GET["action"])){
-        
+        // Get action
         switch($_GET["action"]){
-            // Add product to basket.
+            // Check action
             case "add" :
+                // if Quantity isn't empty or it isn't 0.
                 if(!empty($_POST["quantity"])){
+                    // Select data from database to itemArray.
                     $productBypId = $db_handle->runQuery("SELECT * FROM product WHERE pid = '".$_GET["pid"]."'");
                     $itemArray = array($productBypId[0]["pid"]=>(array( 'pid' => $productBypId[0]["pid"], 
                                                                         'pname' => $productBypId[0]["pname"],
@@ -17,10 +20,11 @@
                                                                         'quantity' => $_POST["quantity"])));
 
                 }
+                // Comment
                 if(!empty($_SESSION["cart_item"])){
                     if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
                         foreach($_SESSION["cart_item"] as $k => $v){
-                            if($_GET["pid"] == $k){
+                            if($productBypId[0]["pid"] == $k){
                                 if(empty($_SESSION["cart_item"][$k]["quantity"])){
                                     $_SESSION["cart_item"][$k]["quantity"] = 0;
                                 }
@@ -125,11 +129,14 @@
 
                 </div>
             </div>
+            <!-- End Profile -->
 
-            <!-- Box Basket -->
+            <!-- Area Basket -->
             <div class="basket">
                 <!-- ฺBasket-->
+                    <!-- Header Text of Basket -->
                     <div class="text-header">ตะกร้าสินค้า</div>
+                    <!-- Action Delete Basket -->
                     <a href="user.php?action=empty" id="btnEmpty">Empty crt</a>
 
                     <?php
@@ -178,11 +185,13 @@
                 <?php
                     }
                 ?>
-
+                <!-- action for confirm data in store to bill.php -->
                 <form action="user.php?action=confirm" method="post">
                     <input type="submit" value="Confirm" name="save_data" class="table-basket-submit">
                 </form>
+                <!-- ฺEnd Basket-->
             </div>
+            <!-- Area Basket -->
         </div>
 
         <!-- Product -->
