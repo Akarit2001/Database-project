@@ -15,6 +15,7 @@
                                                                         'pprice' => $productBypId[0]["pprice"],
                                                                         'pamount' => $productBypId[0]["pamount"],
                                                                         'quantity' => $_POST["quantity"])));
+
                 }
                 if(!empty($_SESSION["cart_item"])){
                     if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
@@ -39,6 +40,15 @@
             case "empty":
                 unset($_SESSION["cart_item"]);
                 break;
+
+            // Confirm data to database.
+            case "confirm":
+                if(!empty($_SESSION["cart_item"])){
+                    // Sent data in store to bill.php
+                    $_SESSION["bill"] = $_SESSION["cart_item"];
+                    header("Location: /program/bill.php");
+                }
+                break;
         }
     }
 ?>
@@ -46,6 +56,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Header -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,6 +79,7 @@
 
 </head>
 
+<!-- body -->
 <body>
     <div class="container">
 
@@ -166,7 +178,10 @@
                 <?php
                     }
                 ?>
-                <input type="submit" value="Confirm" name="save_data" class="table-basket-submit">
+
+                <form action="user.php?action=confirm" method="post">
+                    <input type="submit" value="Confirm" name="save_data" class="table-basket-submit">
+                </form>
             </div>
         </div>
 
@@ -174,8 +189,6 @@
         <div class="container">
             <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
                 <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-                    
-
                     
                     <!-- All Product -->
                     <?php
