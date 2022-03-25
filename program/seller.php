@@ -1,5 +1,5 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 ?>
 <?php
 
@@ -41,7 +41,10 @@ if (!$_SESSION["UserID"]) {  //check session
 
 // query data
 $sql = "SELECT * FROM product where sid = " . $selerID . ";";
+$sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
 $result = $conn->query($sql);
+$result2 = $conn->query($sql2);
+
 
 // add data
 echo isset($_POST["pname"]);
@@ -49,7 +52,7 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
     $pname = $_POST["pname"];
     $price = $_POST["price"];
     $pamount = 0;
-    $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamount );
+    $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamount);
     $sqlInsert = "INSERT INTO product (sid,pname, pprice,pamount ) VALUES " . $mstr;
     if ($conn->query($sqlInsert)) {
         header("Refresh:0; url=seller.php"); //reload page
@@ -60,7 +63,7 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
 if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apid = $_POST["apid"];
     $apamount = $_POST["addamout"];
-    $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount );
+    $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount);
     $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmout) VALUES " . $mstr;
     // $tempamount = 0;
     $getoldAmout = "select * form product WHERE pid = '" . $apid . "';";
@@ -70,6 +73,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
         header("Refresh:0; url=seller.php"); //reload page
     }
 }
+
 
 ?>
 
@@ -207,10 +211,24 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                                 }
                             }
                             ?>
+                        </p>
                     </div>
                     <h2>Add history</h2>
                     <div id="product_Add" class="interfaceproduct">
-                        <p>ไม่มีประวัติสินค้าที่ถูกเพิ่ม</p>
+                        <p>
+                            <?php
+                            if ($result2->num_rows > 0) {
+                                // output data of each row
+                                while ($row = $result2->fetch_assoc()) {
+                                    $str = '<p class="product_list">' . 'pid: ' . $row['aid'] . ' Pname: ' . $row['pname'] . ' addAmount: ' . $row['addAmount'] . '</p>';
+                                    echo $str;
+                                }
+                            } else {
+                                echo $result2."555555555555";
+                                echo "ไม่มีประวัติสินค้าที่ถูกเพิ่ม";
+                            }
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
