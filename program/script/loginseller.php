@@ -1,6 +1,7 @@
-
 <?php
 session_start();
+?>
+<?php
 if (isset($_POST['sname'])) {
     //connection
     $servername = "127.0.0.1";
