@@ -1,0 +1,113 @@
+#invoice-POS{
+    box-shadow: 0 0 1in -0.25in rgba(116, 100, 100, 0.5);
+    padding:2mm;
+    margin: auto;
+    /* width: 500mm; */
+    width: 50%;
+    background: rgb(255, 255, 255);
+}
+  ::selection {background: rgb(252, 103, 103); 
+  color: red;}
+  ::moz-selection {background: #000000; color: #FFF;}
+  h1{
+    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+  }
+  h2{font-size: .9em;}
+  h3{
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 2em;
+  }
+  .top-header{
+    
+    background-color: rgb(70, 69, 67);
+  }
+
+
+  .button{
+    color: #000000;
+    background-color: rgb(145, 145, 145);
+    margin-top: 15px;
+    padding: 6px;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;  
+    right: 26%;   
+  }
+  .menu-item{
+    color:rgb(255, 255, 255);
+    padding:10px;
+    display: inline-block;
+    text-decoration: none;
+  }
+  p{
+    font-size: .7em;
+    color: #666;
+    line-height: 1.2em;
+  }
+
+  #top{
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-top: 15px;
+  }
+
+  #mid{
+    border-bottom: 1px solid rgb(0, 0, 0);
+  }
+
+  #bot{
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-top: 15px;
+  }
+  
+  
+  #top{min-height: 80px;}
+  #mid{min-height: 90px;} 
+  #bot{ min-height: 60px;}
+  
+  #top .logo{
+    float: left;
+    height: 80px;
+    width: 80px;
+    background: url(https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1) no-repeat;
+    background-size: 70px 70px;
+    margin-left: 10;
+  }
+  .clientlogo{
+    float: left;
+    height: 100px;
+    width: 100px;
+    background: url(https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1) no-repeat;
+    background-size: 60px 60px;
+    border-radius: 50px;
+  }
+  .info{
+    display: block;
+    float:left;
+    margin-left: 12.5;
+  }
+  .title{
+    float: right;
+  }
+  .title p{text-align: right;} 
+  table{
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td{
+    padding: 5px 0 5px 15px;
+    border: 1px solid #EEE
+  }
+  .tabletitle{
+    padding: 5px;
+    font-size: .8em;
+    background: rgb(255, 255, 255);
+  }
+  .service{border-bottom: 1px solid #EEE;}
+  .item{width: 24mm;}
+  .itemtext{font-size: 0.4.em;}
+  
+  #legalcopy{
+    margin-top: 5mm;
+  }

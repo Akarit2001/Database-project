@@ -58,9 +58,18 @@
 
                 // Add
                 if(!empty($_SESSION["cart_item"])){
-                    if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
+                    $check = False;
+                    // Check pId of add with pId of basket.
+                    foreach($_SESSION["cart_item"] as $k => $v){
+                        if( $productBypId[0]["pid"] == $_SESSION["cart_item"][$k]["pid"]){
+                            $check = True;
+                        }
+                    }
+                    if($check){
+                        // pId of add has in basket.
                         foreach($_SESSION["cart_item"] as $k => $v){
-                            if($productBypId[0]["pid"] == $k){
+                            // check pId 
+                            if($productBypId[0]["pid"] == $_SESSION["cart_item"][$k]["pid"]){
                                 if(empty($_SESSION["cart_item"][$k]["quantity"])){
                                     $_SESSION["cart_item"][$k]["quantity"] = 0;
                                 }
@@ -68,6 +77,7 @@
                             }
                         }
                     }else{
+                        echo "Hi man";
                         $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
                     }
                 }
@@ -85,14 +95,32 @@
             case "confirm":
                 if(!empty($_SESSION["cart_item"])){
                     // Sent data in store to bill.php
+                    $_SESSION["userID"] = $userID;
+                    $_SESSION["customername"] = $customername;
+                    $_SESSION["phone"] = $phone;
+                    $_SESSION["addr"] = $addr;
                     $_SESSION["bill"] = $_SESSION["cart_item"];
                     header("Location: /program/bill.php");
                 }
                 // Search pId then update amount of product.
-                foreach($_SESSION["cart_item"] as $item){   
-                    // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
-                    $conn->query("UPDATE product SET pamount = pamount - ". $item["quantity"]. " WHERE pid = ".$item['pid']." and sid = ".$item['sid']."");
+                if(!empty($_SESSION["cart_item"])){
+                    foreach($_SESSION["cart_item"] as $item){   
+                        // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
+                        $conn->query("UPDATE product SET pamount = pamount - ". $item["quantity"]. " WHERE pid = ".$item['pid']." and sid = ".$item['sid']."");
+                    }
                 }
+                // Create bill.
+                if(!empty($_SESSION["cart_item"])){
+                    // Get all data from database.
+                    $result = $conn->query("SELECT * FROM bill");
+                    // Gen Bill Id.
+                    $billId = $result->num_rows + 1;
+                    foreach($_SESSION["cart_item"] as $item){   
+                        // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
+                        $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES (".$billId.",".$userID.",".$item['pid'].",".$item['quantity'].");");
+                    }
+                }
+                // Clear _SESSTION.
                 unset($_SESSION["cart_item"]);
                 break;
             // Log out 
@@ -258,7 +286,8 @@
                     ?>
                     <div class="col hp">
                         <div class="card h-100 shadow-sm">
-                            <form action="customer.php?action=add&pid=<?php echo $product_array[$key]["pid"];?>" method="post">
+
+                            <form id="addProduct" action="customer.php?action=add&pid=<?php echo $product_array[$key]["pid"];?>" method="post">
 
                             <div class="card-body">
                                 <!-- Price Product -->
@@ -278,13 +307,12 @@
                                 </h5>
                                 <!-- Add Product to baskest -->
                                 <div class="d-grid gap-2 my-4">
-
                                     <input type="number" class="product-quantity" name="quantity" value="1" size="2">
-                                    <input type="submit" value="Add to cart"  class="btn btn-warning bold-btn"></a>
-
+                                    <input type="submit" value="Add to cart" name="addProduct" class="btn btn-warning bold-btn">
                                 </div>
                             </div>
-                        </form>
+
+                            </form>
                         </div>
                     </div>
 
@@ -299,5 +327,4 @@
         </div>
     </div>
 </body>
-
 </html>
