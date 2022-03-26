@@ -1,5 +1,19 @@
 <?php
     session_start();
+    // Connect
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "mystore";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn->set_charset("utf8");
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     require_once('dbcontroller.php');
     $db_handle = new DBController();
     
@@ -29,8 +43,8 @@
                                                                         'pname' => $productBypId[0]["pname"],
                                                                         'pprice' => $productBypId[0]["pprice"],
                                                                         'pamount' => $productBypId[0]["pamount"],
-                                                                        'quantity' => $_POST["quantity"])));
-
+                                                                        'sid' => $productBypId[0]["sid"],
+                                                                        'quantity' => $_POST["quantity"])));  
                 }
 
                 // Quantity most than Amount of product in database.
@@ -42,7 +56,7 @@
                     break;
                 }
 
-                // Comment
+                // Add
                 if(!empty($_SESSION["cart_item"])){
                     if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
                         foreach($_SESSION["cart_item"] as $k => $v){
@@ -50,7 +64,7 @@
                                 if(empty($_SESSION["cart_item"][$k]["quantity"])){
                                     $_SESSION["cart_item"][$k]["quantity"] = 0;
                                 }
-                                $_SESSION["cart"][$k]["quantity"] += $_POST["quantity"];
+                                $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
                             }
                         }
                     }else{
@@ -73,6 +87,11 @@
                     // Sent data in store to bill.php
                     $_SESSION["bill"] = $_SESSION["cart_item"];
                     header("Location: /program/bill.php");
+                }
+                // Search pId then update amount of product.
+                foreach($_SESSION["cart_item"] as $item){   
+                    // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
+                    $conn->query("UPDATE product SET pamount = pamount - ". $item["quantity"]. " WHERE pid = ".$item['pid']." and sid = ".$item['sid']."");
                 }
                 unset($_SESSION["cart_item"]);
                 break;

@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="css/style_usre.css"> -->
     <link rel="stylesheet" href="css/style_register.css">
     <link rel="stylesheet" href="css/style_main.css">
-    <title>สมัครสมากชิก</title>
+    <title>Register</title>
 </head>
 
 <body>
