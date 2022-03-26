@@ -92,36 +92,66 @@
 
             // Confirm data to database.
             case "confirm":
-                if(!empty($_SESSION["cart_item"])){
-                    // Sent data in store to bill.php
-                    $_SESSION["userID"] = $userID;
-                    $_SESSION["customername"] = $customername;
-                    $_SESSION["phone"] = $phone;
-                    $_SESSION["addr"] = $addr;
-                    $_SESSION["bill"] = $_SESSION["cart_item"];
-                    header("Location: /program/bill.php");
-                }
-                // Search pId then update amount of product.
-                if(!empty($_SESSION["cart_item"])){
-                    foreach($_SESSION["cart_item"] as $item){   
-                        // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
-                        $conn->query("UPDATE product SET pamount = pamount - ". $item["quantity"]. " WHERE pid = ".$item['pid']." and sid = ".$item['sid']."");
+                // Variable Check 
+                $check = FALSE;
+                // Check amount of each basket with amount of product in database.
+                foreach($_SESSION["cart_item"] as $k => $v){
+                    $result = $conn->query("SELECT * FROM product");
+                    while ($product = $result->fetch_assoc()){
+                        if ($_SESSION["cart_item"][$k]["pid"] == $product["pid"]){
+                            if($_SESSION["cart_item"][$k]["quantity"] > $product["pamount"]){
+                                // Quantity more than Amount.
+                                echo "<script>";
+                                $s = "ยอดสินค้ามีไม่พอ";
+                                echo "alert(\" $s\");";
+                                echo "</script>";
+                                $check = FALSE;
+                                break;
+                            }else{
+                                // Quantity less than Amount.
+                                $check = TRUE;
+                            }
+                        }
                     }
                 }
-                // Create bill.
-                if(!empty($_SESSION["cart_item"])){
-                    // Get all data from database.
-                    $result = $conn->query("SELECT * FROM bill");
-                    // Gen Bill Id.
-                    $billId = $result->num_rows + 1;
-                    foreach($_SESSION["cart_item"] as $item){   
-                        // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
-                        $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES (".$billId.",".$userID.",".$item['pid'].",".$item['quantity'].");");
+
+                // Quantity less than Amount.
+                if($check == TRUE){
+                    if(!empty($_SESSION["cart_item"])){
+                        // Sent data in store to bill.php
+                        $_SESSION["userID"] = $userID;
+                        $_SESSION["customername"] = $customername;
+                        $_SESSION["phone"] = $phone;
+                        $_SESSION["addr"] = $addr;
+                        $_SESSION["bill"] = $_SESSION["cart_item"];
+                        header("Location: /program/bill.php");
                     }
+                    // Search pId then update amount of product.
+                    if(!empty($_SESSION["cart_item"])){
+                        foreach($_SESSION["cart_item"] as $item){   
+                            // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
+                            $conn->query("UPDATE product SET pamount = pamount - ". $item["quantity"]. " WHERE pid = ".$item['pid']." and sid = ".$item['sid']."");
+                        }
+                    }
+                    // Create bill.
+                    if(!empty($_SESSION["cart_item"])){
+                        // Get all data from database.
+                        $result = $conn->query("SELECT * FROM bill");
+                        // Gen Bill Id.
+                        $billId = $result->num_rows + 1;
+                        foreach($_SESSION["cart_item"] as $item){   
+                            // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
+                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES (".$billId.",".$userID.",".$item['pid'].",".$item['quantity'].");");
+                        }
+                    }
+                    // Clear _SESSTION.
+                    unset($_SESSION["cart_item"]);
+                    break;
+                }else{
+                    // Quantity more than Amount.
+                    break;
                 }
-                // Clear _SESSTION.
-                unset($_SESSION["cart_item"]);
-                break;
+
             // Log out 
             case "logout":
                 // Clear $_SESSION
