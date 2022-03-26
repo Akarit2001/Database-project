@@ -8,12 +8,6 @@
         $sname = $_POST["cname"];
     }
 
-    // query data
-    $userID = 0;
-    $cname = "";
-    $phone = "";
-    $adrr = "";
-
     // Get data of customer to insert in profile.
     $userID = $_SESSION["UserID"];
     $customername = $_SESSION["customername"];
@@ -70,6 +64,14 @@
                     $_SESSION["bill"] = $_SESSION["cart_item"];
                     header("Location: /program/bill.php");
                 }
+                unset($_SESSION["cart_item"]);
+                break;
+            // Log out 
+            case "logout":
+                // Clear $_SESSION
+                unset($_SESSION["cart_item"]);
+                // Go to index.php page.
+                header("Location: /program/index.php");
                 break;
         }
     }
@@ -132,9 +134,13 @@
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
-                    <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-danger btn-sm" onclick="window.open('index.php');self.close()">log out</button>
-                    </div>
+                    
+                        <div class="profile-userbuttons">
+                        <form action="customer.php?action=logout" method="post">
+                            <input type="submit" class="btn btn-danger btn-sm" value="LOG OUT">
+                            </form>
+                        </div>
+                    
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">

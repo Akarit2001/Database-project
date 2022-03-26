@@ -26,6 +26,6 @@
 </head>
 <body>
     </br>
-    <a href="user.php">Back</a>
+    <a href="customer.php">Back</a>
 </body>
 </html>
