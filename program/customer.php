@@ -32,6 +32,16 @@
                                                                         'quantity' => $_POST["quantity"])));
 
                 }
+
+                // Quantity most than Amount of product in database.
+                if ($_POST["quantity"] > $productBypId[0]["pamount"]){
+                    echo "<script>";
+                    $s = "ยอดสินค้าไม่พอ";
+                    echo "alert(\" $s\");";
+                    echo "</script>";
+                    break;
+                }
+
                 // Comment
                 if(!empty($_SESSION["cart_item"])){
                     if(in_array($productBypId[0]["pid"], array_keys($_SESSION["cart_item"]))){
@@ -225,7 +235,7 @@
                         $product_array = $db_handle->runQuery("SELECT * FROM product ORDER BY pid ASC");
                         if(!empty($product_array)){
                             foreach($product_array as $key => $value){
-
+                                if($product_array[$key]["pamount"] > 0){
                     ?>
                     <div class="col hp">
                         <div class="card h-100 shadow-sm">
@@ -242,7 +252,7 @@
                                 </h5>
                                 <!-- Amount Product -->
                                 <h5 class="amount-title">
-                                    <a >จำนวน <?php echo $product_array[$key]["pamount"];?></a>
+                                    <a >เหลือ <?php echo $product_array[$key]["pamount"];?></a>
                                 </h5>
                                 <h5 class="seller-title">
                                     <a >ร้าน <?php echo $product_array[$key]["sid"];?></a>
@@ -262,6 +272,7 @@
                     <?php
                             }
                         }
+                    }
                     ?>
                     <!-- End All Projuct -->
                 </div>
