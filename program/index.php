@@ -30,13 +30,12 @@
                         </div>
                         <h3 class="text-logo">Sign In</h3>
                         <br>
-                        <form class="text-center">
-                            <input class="form-control border-0" type="text" name="" placeholder="Type Your Username">
+                        <form class="text-center" action="./script/logincustomer.php" method="POST">
+                            <input class="form-control border-0" type="text" name="cname" placeholder="Type Your Username">
                             <br>
-                            <input class="form-control border-0" type="password" name="" placeholder="Type Your Password">
+                            <input class="form-control border-0" type="password" name="cpass" placeholder="Type Your Password">
                             <br>
-                            <a href="user.php">ssssssss</a>
-                            <a href="user.php"><input class="btn btn-primary btn-sm border-0 " type="submit" name="submitcus" value="Customer Sign In"></input></a>
+                            <input class="btn btn-primary btn-sm border-0 " type="submit" name="submituser" value="Customer Sign In"></input>
                             <p class="forgot"><a href="">Forgot Password?</a></p>
                         </form>
                         <form class="text-center" action="./script/loginseller.php" method="POST">
@@ -49,7 +48,7 @@
                         </form>
                     </div>
                     <div class="nomember">
-                        <p class="text-center">Not a member? <a href="register.html">Create an Account</a></p>
+                        <p class="text-center">Not a member? <a href="register.php">Create an Account</a></p>
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@ if (isset($_POST["sname"]) && isset($_POST["spass"])) {
 if (!$_SESSION["UserID"]) {  //check session
     $selerID = $_SESSION["UserID"];
 
-    // Header("Location: ./index.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
+    Header("Location: ./index.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
 } else {
     $selerID = $_SESSION["UserID"];
     $sname = $_SESSION["sellername"];
@@ -39,8 +39,9 @@ if (!$_SESSION["UserID"]) {  //check session
     $addr =  $_SESSION["addr"];
 }
 
-// query data
+// query data แสดงสินค้า
 $sql = "SELECT * FROM product where sid = " . $selerID . ";";
+// query data ประวัติการเพิ่มสินค้า
 $sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
 $result = $conn->query($sql);
 $result2 = $conn->query($sql2);
@@ -224,7 +225,6 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                                     echo $str;
                                 }
                             } else {
-                                echo $result2."555555555555";
                                 echo "ไม่มีประวัติสินค้าที่ถูกเพิ่ม";
                             }
                             ?>

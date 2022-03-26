@@ -1,6 +1,7 @@
+
 <?php
 session_start();
-if (isset($_POST['cname'])) {
+if (isset($_POST['sname'])) {
     //connection
     $servername = "127.0.0.1";
     $username = "root";
@@ -11,23 +12,23 @@ if (isset($_POST['cname'])) {
 
 
     //รับค่า user & password
-    $Username = $_POST['cname'];
-    $Password = $_POST['cpass'];
+    $Username = $_POST['sname'];
+    $Password = $_POST['spass'];
     //query 
-    $sql = "SELECT * FROM customer Where cfname='" . $Username . "' and 	cpassword='" . $Password . "' ";
+    $sql = "SELECT * FROM seller Where sfname='" . $Username . "' and 	pass='" . $Password . "' ";
 
     $result = $conn->query($sql);
 
     if ($result->num_rows >= 1) {
         while($row = $result->fetch_assoc()) {
-            $_SESSION["UserID"] = $row["cid"];
-            $_SESSION["customername"] = $row["cfname"] . " " . $row["clname"];
-            $_SESSION["phone"] = $row["cphone"];
-            $_SESSION["addr"] = $row["caddress"];
+            $_SESSION["UserID"] = $row["sid"];
+            $_SESSION["sellername"] = $row["sfname"] . " " . $row["slname"];
+            $_SESSION["phone"] = $row["sphone"];
+            $_SESSION["addr"] = $row["saddress"];
             
           }
 
-        Header("Location: ../customer.php");
+        Header("Location: ../seller.php");
     } else {
         echo "<script>";
         $s = "user หรือ  password ไม่ถูกต้อง";
@@ -38,3 +39,4 @@ if (isset($_POST['cname'])) {
 } else {
     Header("Location: ../index.php"); //user & password incorrect back to login again
 }
+?>
