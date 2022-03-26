@@ -67,8 +67,6 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apamount = $_POST["addamout"];
     $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount);
     $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount) VALUES " . $mstr;
-    // $tempamount = 0;
-    // $getoldAmout = "select * form product WHERE pid = '" . $apid . "';";
 
     $sqlAlt_product = "UPDATE product SET pamount = pamount +" . $apamount . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
     if ($conn->query($sqlAdd_addproduct) && $conn->query($sqlAlt_product)) {
@@ -233,6 +231,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                             } else {
                                 echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
                             }
+
                             ?>
                         </table>
                     </div>
@@ -276,7 +275,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                                 while ($rowt = $result4->fetch_assoc()) {
                                     // query data รายการสินค้าที่ถูกซื้อ
                                     $sql3 = "SELECT bill.pid,product.pname,SUM(bill.bamount) sumAmount,product.pprice,product.pprice*SUM(bill.bamount) sellTotal FROM bill,product 
-                                    WHERE bill.pid = product.pid AND bill.pid =" .$rowt['pid']. " 
+                                    WHERE bill.pid = product.pid AND bill.pid =" . $rowt['pid'] . " 
                                     GROUP BY bill.pid,product.pprice,product.pname";
                                     $result3 = $conn->query($sql3);
                                     if ($result3->num_rows > 0) {

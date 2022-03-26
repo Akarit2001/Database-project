@@ -15,15 +15,25 @@
 
     <div class="container">
 
-        <a href="index.php" class="back-btn">back</a>
+        <div class="bb">
+            <a href="index.php" class="back-btn">back</a>
+        </div>
 
 
-        <form action="/action_page.php">
+        <form action="./script/registerCheck.php" method="post">
             <div class="container">
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
-
+                <label class="opt" for="opt"><b>ตำแหน่ง*</b></label>
+                <select name="position" id="opt">
+                    <option value="cus">
+                        <p class="ooo">Customer</p>
+                    </option>
+                    <option value="sell">
+                        <p class="ooo">Seller</p>
+                    </option>
+                </select><br>
                 <label for="fname"><b>First Name</b></label>
                 <input type="text" placeholder="Enter name" name="fname" id="fname" required>
                 <label for="lname"><b>Last Name</b></label>
@@ -40,12 +50,9 @@
                 <label for="address"><b>Address</b></label>
                 <input type="text" placeholder="Enter address" name="address" id="address" required>
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                <label for="opt">ตำแหน่ง</label>
 
-                <select name="cars" id="opt">
-                    <option value="sell">Sell</option>
-                    <option value="cus">Customer</option>
-                </select>
+
+
                 <button type="submit" class="registerbtn">Register</button>
             </div>
             <script src="js/script.js"></script>

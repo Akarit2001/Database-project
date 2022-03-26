@@ -16,7 +16,7 @@ body {
 /* Full-width input fields */
 input[type=text],
 input[type=tel],
-input[type=password] {
+input[type=password], #opt {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -64,3 +64,31 @@ a {
     background-color: #f1f1f1;
     text-align: center;
 }
+
+.opt {
+    color: red;
+    font-size: 20px;
+    /* text-shadow: 2px 2px 2px #ff0000; */
+}
+
+.ooo {
+    /* padding: 20px; */
+    font-size: 20px;
+}
+
+.select-items {
+    padding: 15px;
+}
+
+.back-btn{
+    margin-top:20px;
+}
+/* select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px;
+}
+option{
+    padding: 30px;
+} */
