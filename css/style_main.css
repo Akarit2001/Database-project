@@ -1,0 +1,24 @@
+body {
+    background-color: rgb(179, 235, 245);
+}
+
+.container {
+    width: 1200px;
+    /* background-color: red; */
+    margin: auto;
+}
+
+.back-btn {
+    padding: 10px;
+    width: 80px;
+    background-color: #04AA6D;
+    border-radius: 2px;
+    border:0px;
+    color: white;
+}
+a{
+    text-decoration:none;
+}
+.back-btn{
+    padding: 10px 50px;
+}
