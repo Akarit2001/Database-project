@@ -107,24 +107,32 @@ body {
 
 /* Profile Content */
 .profile-content {
-    
+
     padding: 30px;
     background: #fff;
     min-height: 1000px;
     overflow: scroll;
     overflow-x: hidden;
 }
-.interfaceproduct{
-    border: 1px solid black;
-    padding: 20px;
+
+.interfaceproduct {
+    /* border: 1px solid black; */
+    padding: 10px;
     font-size: 1em;
-    font-weight:bold;
+    font-weight: bold;
+    margin-bottom: 20px;
+    max-height: 350px;
+    overflow-y: auto;
 }
-.product_list{
+
+.product_list {
     padding: 5px;
-    border:2px solid royalblue;
+    border: 2px solid royalblue;
     color: black;
 }
+
+
+
 
 
 
@@ -241,12 +249,26 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
 } */
 
 .div_btn {
-    margin: 10px;
+    margin-top: 20px;
 }
 
 .mybtn {
     width: 100px;
     margin-left: 85%;
+    padding: 5px;
+    font-weight:600;
+    border: none;
+    background-color: rgb(228, 0, 0);
+    box-shadow: 2px 2px 2px #888888;
+
+    /* border-radius:100%; */
+}
+.mybtn:hover{
+    background-color: rgb(170, 0, 0);
+    transition: .25s;
+    width: 110px;
+    color: white;
+    
 }
 
 legend {
@@ -260,11 +282,88 @@ legend {
     background-color: rgb(255, 255, 255);
     border: 1px thin black;
 }
-label{
+
+label {
     padding: 2px 15px;
 }
 
-.mylist{
+.mylist {
     border: 1px solid black;
-    color:#5b9bd1;
+    color: #5b9bd1;
 }
+
+
+#customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-indent: 20px;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+fieldset {
+    background-color: #eeeeee;
+    padding-bottom: 10px;
+  }
+  
+  legend {
+    background-color: rgb(5, 153, 0);
+    color: white;
+    padding: 5px 10px;
+  }
+
+  .fcss{
+      margin-bottom: 25px;
+  }
+
+  .lfm{
+      font-weight: bold;
+      width: 80px;
+  }
+  input{
+      width:50%;
+  }

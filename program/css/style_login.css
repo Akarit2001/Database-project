@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body {
-	background-color: #00aeff;
+	background-color: #93f8f8;
 	font-family: 'Lato', sans-serif;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .btn {
 	font-size: 22px;
-	background-color: #0278ae;
+	background-color: #00945e;
 	border: none;
 	width: 18rem;
 	height: 3rem;

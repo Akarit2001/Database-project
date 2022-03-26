@@ -43,8 +43,11 @@ if (!$_SESSION["UserID"]) {  //check session
 $sql = "SELECT * FROM product where sid = " . $selerID . ";";
 // query data ประวัติการเพิ่มสินค้า
 $sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
+
 $result = $conn->query($sql);
 $result2 = $conn->query($sql2);
+// 
+$sql = "SELECT * FROM product where sid = " . $selerID . ";";
 
 
 // add data
@@ -153,7 +156,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                         <!-- END STAT -->
                         <div>
                             <h4 class="profile-desc-title">About Jason Davis</h4>
-                            <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore.
+                            <span class="profile-desc-text"> ผู้มีอุปการะคุณที่เขียนเทมเพลสนี้ให้ทุกคนได้ใช้.
                             </span>
                             <div class="margin-top-20 profile-desc-link">
                                 <i class="fa fa-globe"></i>
@@ -174,59 +177,122 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
             </div>
             <div class="col-md-9">
                 <div class="profile-content">
-                    <form action="" method="POST" enctype="multipart/form-data" name="addproduct">
+                    <form class="fcss" action="" method="POST" enctype="multipart/form-data" name="addproduct">
                         <fieldset>
                             <legend>Addproduct</legend>
-                            <label for="pName">PName:</label>
-                            <input id="pName" type="text" placeholder="Product name" name="pname" required>
-                            <label for="price">Price: </label>
-                            <input id="price" type="number" min="1" placeholder="Product price" name="price" required>
+                            <div>
+                                <label class="lfm" for="pName">PName:</label>
+                                <input id="pName" type="text" placeholder="Product name" name="pname" required>
+                            </div>
+                            <hr>
+                            <div>
+                                <label class="lfm" for="price">Price: </label>
+                                <input id="price" type="number" min="1" placeholder="Product price" name="price" required>
+                                <!-- <hr> -->
+                            </div>
+
                         </fieldset>
                         <div class="div_btn">
                             <button type="submit" class="mybtn" name="addpro">เพิ่ม</button>
                         </div>
                     </form>
-                    <form action="" method="POST" enctype="multipart/form-data" name="adm">
+                    <form class="fcss" action="" method="POST" enctype="multipart/form-data" name="adm">
                         <fieldset>
                             <legend>เพิ่มจำนวนสินค้า</legend>
-                            <label for="apid">PID: </label>
-                            <input id="apid" type="number" min="1" placeholder="ID สินค้าที่ต้องการเพิ่ม" name="apid" required>
-                            <label for="addamout">Amout: </label>
-                            <input id="addamout" type="number" min="1" placeholder="จำนวนสินค้าที่ต้องการเพิ่ม" name="addamout" required>
+                            <div>
+                                <label class="lfm" for="apid">PID: </label>
+                                <input id="apid" type="number" min="1" placeholder="ID สินค้าที่ต้องการเพิ่ม" name="apid" required>
+                            </div>
+                            <hr>
+                            <div>
+                                <label class="lfm" for="addamout">Amout: </label>
+                                <input id="addamout" type="number" min="1" placeholder="จำนวนสินค้าที่ต้องการเพิ่ม" name="addamout" required>
+                            </div>
                         </fieldset>
                         <div class="div_btn">
                             <button type="submit" class="mybtn" name="addA">เพิ่ม</button>
                         </div>
                     </form>
 
-                    <h2>สินค้าทั้งหมด</h2>
+                    <h2 class="underline">สินค้าทั้งหมด</h2>
                     <div id="product_list" class="interfaceproduct">
-                        <p><?php
+                        <table id="customers">
+                            <tr>
+                                <th>ID สินค้า</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>ราคา/$</th>
+                                <th>จำนวนคงเหลือ</th>
+                            </tr>
+                            <?php
                             if ($result->num_rows > 0) {
                                 // output data of each row
                                 while ($row = $result->fetch_assoc()) {
-                                    $str = '<p class="product_list">' . 'pid: ' . $row['pid'] . ' Pname: ' . $row['pname'] . ' Pprice: ' . $row['pprice'] . ' pamount : ' . $row['pamount'] . '</p>';
-                                    echo $str;
-                                }
-                            }
-                            ?>
-                        </p>
-                    </div>
-                    <h2>Add history</h2>
-                    <div id="product_Add" class="interfaceproduct">
-                        <p>
-                            <?php
-                            if ($result2->num_rows > 0) {
-                                // output data of each row
-                                while ($row = $result2->fetch_assoc()) {
-                                    $str = '<p class="product_list">' . 'AddID: ' . $row['aid'] . ' Pname: ' . $row['pname'] . ' addAmount: ' . $row['addAmount'] . '</p>';
+                                    $str = '<tr><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['pprice'] . '</td><td>' . $row['pamount'] . '</td></tr>';
                                     echo $str;
                                 }
                             } else {
-                                echo "ไม่มีประวัติสินค้าที่ถูกเพิ่ม";
+                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
                             }
                             ?>
-                        </p>
+                        </table>
+                    </div>
+                    <h2 class="underline">Add history</h2>
+                    <div id="product_Add" class="interfaceproduct">
+                        <table id="customers">
+                            <tr>
+                                <th>ID ประวัติการเพิ่มสินค้า</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>จำนวนที่ถูกเพิ่ม</th>
+                            </tr>
+                            <?php
+                            if ($result2->num_rows > 0) {
+                                // แสดงประวัติการเพิ่มสินค้า
+                                while ($row = $result2->fetch_assoc()) {
+                                    $str = '<tr><td>' . $row['aid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['addAmount']   . '</td></tr>';
+                                    echo $str;
+                                }
+                            } else {
+                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <h2 class="underline">สินค้าที่ถูกซื้อ</h2>
+                    <div id="product_Add" class="interfaceproduct">
+                        <table id="customers">
+                            <tr>
+                                <th>ID สินค้า</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>ราคา</th>
+                                <th>ยอดขาย</th>
+                                <th>รวมจำนวนเงิน $</th>
+                            </tr>
+                            <?php
+                            // query pid สินค้าที่เป็นของ seller คนนี้
+                            $sql4 = "SELECT pid FROM product WHERE sid = " . $selerID . ";";
+                            $result4 = $conn->query($sql4);
+                            if ($result4->num_rows > 0) {
+
+                                while ($rowt = $result4->fetch_assoc()) {
+                                    // query data รายการสินค้าที่ถูกซื้อ
+                                    $sql3 = "SELECT bill.pid,product.pname,SUM(bill.bamount) sumAmount,product.pprice,product.pprice*SUM(bill.bamount) sellTotal FROM bill,product 
+                                    WHERE bill.pid = product.pid AND bill.pid =" .$rowt['pid']. " 
+                                    GROUP BY bill.pid,product.pprice,product.pname";
+                                    $result3 = $conn->query($sql3);
+                                    if ($result3->num_rows > 0) {
+                                        // แสดงรายการสินค้าที่ถูกซื้อ
+                                        while ($row = $result3->fetch_assoc()) {
+                                            $str = '<tr><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['pprice'] . '</td><td>' . $row['sumAmount']   . '</td><td>' . $row['sellTotal'] . '</td></tr>';
+                                            // $str = "ssss";
+                                            echo $str;
+                                        }
+                                    }
+                                }
+                            } else {
+                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
+                            }
+                            ?>
+                        </table>
                     </div>
                 </div>
             </div>

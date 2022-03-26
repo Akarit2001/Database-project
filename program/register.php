@@ -36,7 +36,7 @@
                 <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
                 <hr>
                 <label for="phone"><b>Phone</b></label>
-                <input type="tel" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" name="phone" id="phone" required>
+                <input type="tel" placeholder="0123456789" pattern="[0-9]{10}" name="phone" id="phone" required>
                 <label for="address"><b>Address</b></label>
                 <input type="text" placeholder="Enter address" name="address" id="address" required>
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
