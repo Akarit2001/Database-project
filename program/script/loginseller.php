@@ -21,13 +21,12 @@ if (isset($_POST['sname'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows >= 1) {
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $_SESSION["UserID"] = $row["sid"];
             $_SESSION["sellername"] = $row["sfname"] . " " . $row["slname"];
             $_SESSION["phone"] = $row["sphone"];
             $_SESSION["addr"] = $row["saddress"];
-            
-          }
+        }
 
         Header("Location: ../seller.php");
     } else {

@@ -24,10 +24,10 @@
                 <p>Please fill in this form to create an account.</p>
                 <hr>
 
-                <label for="name"><b>First Name</b></label>
-                <input type="text" placeholder="Enter name" name="name" id="name" required>
-                <label for="name"><b>Last Name</b></label>
-                <input type="text" placeholder="Enter last name" name="name" id="name" required>
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" placeholder="Enter name" name="fname" id="fname" required>
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter last name" name="lname" id="lname" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
@@ -40,11 +40,17 @@
                 <label for="address"><b>Address</b></label>
                 <input type="text" placeholder="Enter address" name="address" id="address" required>
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <label for="opt">ตำแหน่ง</label>
+
+                <select name="cars" id="opt">
+                    <option value="sell">Sell</option>
+                    <option value="cus">Customer</option>
+                </select>
                 <button type="submit" class="registerbtn">Register</button>
             </div>
             <script src="js/script.js"></script>
             <div class="container signin">
-                <p>Already have an account? <a href="index.html">Sign in</a>.</p>
+                <p>Already have an account? <a href="index.php">Sign in</a>.</p>
             </div>
         </form>
     </div>

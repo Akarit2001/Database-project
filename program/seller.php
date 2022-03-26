@@ -59,15 +59,14 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
         header("Refresh:0; url=seller.php"); //reload page
     }
 }
-// echo 'test';
-// echo isset($_POST["apid"]);
+// addmount
 if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apid = $_POST["apid"];
     $apamount = $_POST["addamout"];
     $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount);
-    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmout) VALUES " . $mstr;
+    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount) VALUES " . $mstr;
     // $tempamount = 0;
-    $getoldAmout = "select * form product WHERE pid = '" . $apid . "';";
+    // $getoldAmout = "select * form product WHERE pid = '" . $apid . "';";
 
     $sqlAlt_product = "UPDATE product SET pamount = pamount +" . $apamount . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
     if ($conn->query($sqlAdd_addproduct) && $conn->query($sqlAlt_product)) {
@@ -221,7 +220,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                             if ($result2->num_rows > 0) {
                                 // output data of each row
                                 while ($row = $result2->fetch_assoc()) {
-                                    $str = '<p class="product_list">' . 'pid: ' . $row['aid'] . ' Pname: ' . $row['pname'] . ' addAmount: ' . $row['addAmount'] . '</p>';
+                                    $str = '<p class="product_list">' . 'AddID: ' . $row['aid'] . ' Pname: ' . $row['pname'] . ' addAmount: ' . $row['addAmount'] . '</p>';
                                     echo $str;
                                 }
                             } else {
