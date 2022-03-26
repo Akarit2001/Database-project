@@ -29,8 +29,6 @@ if (isset($_POST["sname"]) && isset($_POST["spass"])) {
 }
 // login here
 if (!$_SESSION["UserID"]) {  //check session
-    $selerID = $_SESSION["UserID"];
-
     Header("Location: ./index.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
 } else {
     $selerID = $_SESSION["UserID"];
