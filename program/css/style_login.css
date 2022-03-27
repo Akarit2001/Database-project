@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body {
-	background-color: #93f8f8;
+	background-color: #ffffff;
 	font-family: 'Lato', sans-serif;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .btn {
 	font-size: 22px;
-	background-color: #00945e;
+	background-color: #42C2FF;
 	border: none;
 	width: 18rem;
 	height: 3rem;
@@ -49,7 +49,7 @@ body {
 }
 
 .btn:hover {
-	background-color: blue;
+	background-color: #85F4FF;
 }
 
 .nomember {
@@ -96,3 +96,10 @@ body {
 /* .card-body{
 	height:6000px;
 } */
+
+.sell{
+	background-color:#EEC373;
+}
+.sell:hover {
+	background-color: #B7CADB;
+}

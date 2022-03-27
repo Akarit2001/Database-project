@@ -124,7 +124,7 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
                     <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-danger btn-sm" onclick="window.open('index.php');self.close()">log out</button>
+                        <a href="./script/logout.php" type="button" class="btn btn-danger btn-sm">LOG OUT</a>
                     </div>
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->

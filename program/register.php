@@ -38,7 +38,6 @@
                 <input type="text" placeholder="Enter name" name="fname" id="fname" required>
                 <label for="lname"><b>Last Name</b></label>
                 <input type="text" placeholder="Enter last name" name="lname" id="lname" required>
-
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
