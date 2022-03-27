@@ -49,7 +49,7 @@
                         <div class="text-center">
                             <img class="logo" src="https://cdn3.iconfinder.com/data/icons/galaxy-open-line-gradient-i/200/account-256.png">
                         </div>
-                        <h3 class="text-logo">Sign In</h3>
+                        <h3 class="text-logo">Sign In Customer</h3>
                         <br>
                         <form class="text-center " action="./script/logincustomer.php" method="POST">
                             <input class="myinput" type="text" name="cname" placeholder="Type Your Username" required>
@@ -76,7 +76,7 @@
                         <div class="text-center" class="ct">
                             <img class="logo" src="https://cdn3.iconfinder.com/data/icons/galaxy-open-line-gradient-i/200/account-256.png">
                         </div>
-                        <h3 class="text-logo">Sign In</h3>
+                        <h3 class="text-logo">Sign In Seller</h3>
                         <br>
                         <form class="text-center" action="./script/loginseller.php" method="POST">
                             <input class="myinput m2" type="text" name="sname" placeholder="Type Your Username" required>
