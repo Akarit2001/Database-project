@@ -153,6 +153,8 @@
                 }
             // Log out 
             case "userhistory":
+                // Send Id user.
+                $_SESSION["userid"] = $userID;
                 // Clear $_SESSION
                 unset($_SESSION["cart_item"]);
                 // Go to index.php page.

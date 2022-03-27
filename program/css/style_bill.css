@@ -81,6 +81,7 @@
     background: url(https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1) no-repeat;
     background-size: 60px 60px;
     border-radius: 50px;
+    
   }
   .info{
     display: block;
@@ -94,6 +95,7 @@
   table{
     width: 100%;
     border-collapse: collapse;
+    
   }
   td{
     padding: 5px 0 5px 15px;
