@@ -92,6 +92,7 @@ if (!$_SESSION["cusID"]) {  //check session
         }
         .bills{
             box-shadow:2px 2px 2px black !important;
+            background-color: #f1f1f1 !important;
         }
     </style>
 </head>
