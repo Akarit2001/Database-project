@@ -220,6 +220,7 @@
 
 <!-- body -->
 <body>
+    <br>
     <div class="container">
 
         <!-- Profile -->
@@ -277,7 +278,7 @@
             <div class="basket">
                 <!-- ฺBasket-->
                     <!-- Header Text of Basket -->
-                    <div class="text-header">ตะกร้าสินค้า</div>
+                    <div class="text-header trakra">ตะกร้าสินค้า</div>
                     <!-- Action Delete Basket -->
                     <a href="customer.php?action=empty" id="btnEmpty">Empty crt</a>
 

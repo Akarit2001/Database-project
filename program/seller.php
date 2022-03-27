@@ -73,6 +73,23 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
 }
 
 
+// ยอดขายกับจำนวนชนิดสินค้าที่มี
+$pt = 0;
+$sellamout = 0;
+// $sl = "select sid from product where sid = ".$selerID;
+$rr = $conn->query($sql);
+$pt = $rr->num_rows;
+
+$pidl = "select pid from product where sid = " . $selerID;
+$sres = $conn->query($pidl);
+if ($sres->num_rows > 0) {
+    while ($ses = $sres->fetch_assoc()) {
+        $sl = "select sum(bamount) summ from bill where pid = " . $ses['pid'];
+        $rr = $conn->query($sl);
+        $sellamout = $sellamout + $rr->fetch_assoc()['summ'];
+    }
+}
+
 ?>
 
 
@@ -137,16 +154,16 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
                         <!-- STAT -->
                         <div class="row list-separated profile-stat">
                             <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> 37 </div>
-                                <div class="uppercase profile-stat-text"> Projects </div>
+                                <div class="uppercase profile-stat-title"> <?php echo $pt ?> </div>
+                                <div class="uppercase profile-stat-text"> <b>Product List</b> </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> 51 </div>
-                                <div class="uppercase profile-stat-text"> Tasks </div>
+                                <div class="uppercase profile-stat-title"> <?php echo $sellamout ?> </div>
+                                <div class="uppercase profile-stat-text"> Sells </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-6">
                                 <div class="uppercase profile-stat-title"> 61 </div>
-                                <div class="uppercase profile-stat-text"> Uploads </div>
+                                <div class="uppercase profile-stat-text"> LIKE </div>
                             </div>
                         </div>
                         <!-- END STAT -->

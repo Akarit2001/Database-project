@@ -11,7 +11,7 @@ $conn->set_charset("utf8");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$_SESSION["cusID"] = $_SESSION["userid"] ;
+$_SESSION["cusID"] = $_SESSION["userid"];
 $status = 0;
 
 $uid = 0;
@@ -53,14 +53,43 @@ if (!$_SESSION["cusID"]) {  //check session
             font-family: 'Courier New', Courier, monospace;
             background-color: #93f8f8;
             font-family: 'Lato', sans-serif;
-            background-image: url("https://steamuserimages-a.akamaihd.net/ugc/951850301356954459/4C0E46016EE7ABF8440FCA7B9B5AB60EF55AA969/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false");
+            background-image: url("https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1");
             background-position: center;
             /* Center the image */
-            background-repeat:repeat;
+            background-repeat: repeat;
             /* Do not repeat the image */
             /* background-size: cover; */
             /* Resize the background image to cover the entire container */
             background-attachment: fixed;
+
+            background: rgb(184, 255, 249);
+            background: radial-gradient(circle, #aaa 0%, #fff 100%);
+        }
+
+        header {
+            padding-left: 60px !important;
+            height: 55px;
+            background-color: #FFC300 !important;
+        }
+
+        header a {
+            text-shadow: 2px 2px 2px black;
+            margin-left: 20px;
+        }
+
+        header a:hover {
+            transition: 0.4s;
+            font-size: 1.2em;
+        }
+        .btb{
+            border-radius:8px;
+            width:80px;
+            background-color: #FF8E00;
+            box-shadow:2px 2px 2px black;
+            text-align:center;
+        }
+        .bills{
+            box-shadow:2px 2px 2px black !important;
         }
     </style>
 </head>
@@ -83,9 +112,9 @@ if (!$_SESSION["cusID"]) {  //check session
 
                 echo '
                 <div style="margin-top:25px"></div>
-<div id="invoice-POS" style="padding:20px; border-radius: 20px;">
+<div id="invoice-POS" style="padding:20px; border-radius: 20px;" class="bills">
 <div style="display: inline-flex; border:1px dashed black;padding:10px;overflow: hidden; width:97%;">
-    <div><img src="https://c.tenor.com/JvArM7ZO5JIAAAAM/bavatogay-ricardo-milos.gif" style="width: 150px;height: 150px;"></div>
+    <div><img src="https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1" style="width: 150px;height: 150px;"></div>
     <div class="info" style="width:600px;  text-align: right;">
         <h1>ONLINE STORE</h1>
     </div>
@@ -170,7 +199,7 @@ if (!$_SESSION["cusID"]) {  //check session
         </table>
     </div>
     <!--End Table-->
-    <a class="button" href="customer.php">BACK </a>
+    <a class="button btb" href="customer.php">BACK </a>
     <div id="legalcopy">
         <p class="legal"><strong>Thank you for your business!</strong> Payment is expected within 31 days </br>please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
         </p>
