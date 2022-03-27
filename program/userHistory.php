@@ -54,6 +54,8 @@ if (!$_SESSION["cusID"]) {  //check session
             background-color: #93f8f8;
             font-family: 'Lato', sans-serif;
             background-image: url("https://i0.wp.com/lucloi.vn/wp-content/uploads/2020/01/damn-it-hurts-right-here-in-my-meow-meow-61195462.png?resize=500%2C570&ssl=1&is-pending-load=1");
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRucA8DdZRHK0sP87tkGJz5pPYr7fKumj9aQA&usqp=CAU");
+
             background-position: center;
             /* Center the image */
             background-repeat: repeat;
@@ -62,8 +64,8 @@ if (!$_SESSION["cusID"]) {  //check session
             /* Resize the background image to cover the entire container */
             background-attachment: fixed;
 
-            background: rgb(184, 255, 249);
-            background: radial-gradient(circle, #aaa 0%, #fff 100%);
+            /* background: rgb(184, 255, 249);
+            background: radial-gradient(circle, #aaa 0%, #fff 100%); */
         }
 
         header {

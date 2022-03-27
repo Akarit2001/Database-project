@@ -112,14 +112,24 @@ if ($sres->num_rows > 0) {
 
     <link rel="stylesheet" href="css/style_seller.css">
     <!-- <link rel="stylesheet" href="css/style_main.css"> -->
-
+    <style>
+        .inadd{
+            color: black;
+            margin: 13px auto;
+            padding:10px 10px;
+            width: 50%;
+            border: none;
+            background-color:#FFF;
+            border-radius: 20px !important;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row profile">
-            <div class="col-md-3">
-                <div class="profile-sidebar">
+            <div class="col-md-3 ">
+                <div class="profile-sidebar ppff">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic d-flex align-items-center">
                         <img src="https://gravatar.com/avatar/31b64e4876d603ce78e04102c67d6144?s=80&d=https://codepen.io/assets/avatars/user-avatar-80x80-bdcd44a3bfb9a5fd01eb8b86f9e033fa1a9897c3a15b33adfc2649a002dab1b6.png" class="img-responsive" alt="">
@@ -155,7 +165,7 @@ if ($sres->num_rows > 0) {
                         <div class="row list-separated profile-stat">
                             <div class="col-md-4 col-sm-4 col-xs-6">
                                 <div class="uppercase profile-stat-title"> <?php echo $pt ?> </div>
-                                <div class="uppercase profile-stat-text"> <b>Product List</b> </div>
+                                <div class="uppercase profile-stat-text"> <b>Product</b> </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-6">
                                 <div class="uppercase profile-stat-title"> <?php echo $sellamout ?> </div>
@@ -195,12 +205,12 @@ if ($sres->num_rows > 0) {
                             <legend>Addproduct</legend>
                             <div>
                                 <label class="lfm" for="pName">PName:</label>
-                                <input id="pName" type="text" placeholder="Product name" name="pname" required>
+                                <input class="inadd" id="pName" type="text" placeholder="Product name" name="pname" required>
                             </div>
                             <hr>
                             <div>
                                 <label class="lfm" for="price">Price: </label>
-                                <input id="price" type="number" min="1" placeholder="Product price" name="price" required>
+                                <input class="inadd" id="price" type="number" min="1" placeholder="Product price" name="price" required>
                                 <!-- <hr> -->
                             </div>
 
@@ -214,12 +224,12 @@ if ($sres->num_rows > 0) {
                             <legend>เพิ่มจำนวนสินค้า</legend>
                             <div>
                                 <label class="lfm" for="apid">PID: </label>
-                                <input id="apid" type="number" min="1" placeholder="ID สินค้าที่ต้องการเพิ่ม" name="apid" required>
+                                <input class="inadd" id="apid" type="number" min="1" placeholder="ID สินค้าที่ต้องการเพิ่ม" name="apid" required>
                             </div>
                             <hr>
                             <div>
                                 <label class="lfm" for="addamout">Amout: </label>
-                                <input id="addamout" type="number" min="1" placeholder="จำนวนสินค้าที่ต้องการเพิ่ม" name="addamout" required>
+                                <input class="inadd" id="addamout" type="number" min="1" placeholder="จำนวนสินค้าที่ต้องการเพิ่ม" name="addamout" required>
                             </div>
                         </fieldset>
                         <div class="div_btn">
@@ -285,6 +295,7 @@ if ($sres->num_rows > 0) {
                             // query pid สินค้าที่เป็นของ seller คนนี้
                             $sql4 = "SELECT pid FROM product WHERE sid = " . $selerID . ";";
                             $result4 = $conn->query($sql4);
+                            $sumsell = 0;
                             if ($result4->num_rows > 0) {
 
                                 while ($rowt = $result4->fetch_assoc()) {
@@ -298,13 +309,13 @@ if ($sres->num_rows > 0) {
                                         while ($row = $result3->fetch_assoc()) {
                                             $str = '<tr><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['pprice'] . '</td><td>' . $row['sumAmount']   . '</td><td>' . $row['sellTotal'] . '</td></tr>';
                                             // $str = "ssss";
+                                            $sumsell = $sumsell + $row['sellTotal'];
                                             echo $str;
                                         }
                                     }
                                 }
-                            } else {
-                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
                             }
+                            echo "<tr><td colspan='4'>รวมจำนวนเงินทั้งหมด</td><td>" . $sumsell . "</td></tr>";
                             ?>
                         </table>
                     </div>

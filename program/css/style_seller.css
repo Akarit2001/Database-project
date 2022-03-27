@@ -260,6 +260,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     border: none;
     background-color: rgb(228, 0, 0);
     box-shadow: 2px 2px 2px #888888;
+    color:white;
 
     /* border-radius:100%; */
 }
@@ -267,7 +268,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     background-color: rgb(170, 0, 0);
     transition: .25s;
     width: 110px;
-    color: white;
+    color: rgb(0, 0, 0);
     
 }
 
@@ -342,16 +343,25 @@ label {
 }
 
 .underline {
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    background-color: #FFCC1D;
+    width:180px;
+    text-align: center;
+    padding:8px;
+    border-radius:40px;
+    font-size: 1.5em;
+    /* text-shadow: 2px 2px 8px black; */
+    box-shadow: 2px 2px 8px black;
 }
 
 fieldset {
     background-color: #eeeeee;
     padding-bottom: 10px;
+    border-radius: 20px;
   }
   
   legend {
-    background-color: rgb(5, 153, 0);
+    background-color: #019267;
     color: white;
     padding: 5px 10px;
   }
@@ -366,4 +376,12 @@ fieldset {
   }
   input{
       width:50%;
+  }
+
+  .btn,.mybtn{
+      border-radius: 20px !important;
+  }
+  .ppff{
+      border-bottom-right-radius: 40px !important;
+      border-top-left-radius: 40px !important;
   }
