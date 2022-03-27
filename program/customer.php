@@ -151,6 +151,13 @@
                     // Quantity more than Amount.
                     break;
                 }
+            // Log out 
+            case "userhistory":
+                // Clear $_SESSION
+                unset($_SESSION["cart_item"]);
+                // Go to index.php page.
+                header("Location: /program/userHistory.php");
+                break;
 
             // Log out 
             case "logout":
@@ -224,6 +231,12 @@
                         <div class="profile-userbuttons">
                         <form action="customer.php?action=logout" method="post">
                             <input type="submit" class="btn btn-danger btn-sm" value="LOG OUT">
+                            </form>
+                        </div>
+
+                        <div class="profile-userbuttons">
+                        <form action="customer.php?action=userhistory" method="post">
+                            <input type="submit" class="btn btn-danger btn-sm" value="History">
                             </form>
                         </div>
                     
