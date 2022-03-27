@@ -1,5 +1,7 @@
 <?php
     session_start();
+?>
+<?
     // Connect
     $servername = "127.0.0.1";
     $username = "root";
@@ -85,6 +87,25 @@
                 }
                 break;
 
+            // Remove product by pId in basket.
+            case "remove":
+                // Data in basket is not empty.
+                if(!empty($_SESSION["cart_item"])){
+                    // For loop for search pid of basket.
+                    foreach($_SESSION["cart_item"] as $k => $v){
+                        // check pid of basket and pid of remove.
+                        if($_SESSION["cart_item"][$k]["pid"] == $_GET["pid"]){
+                            // delete row data in baskey by Key.
+                            unset($_SESSION["cart_item"][$k]);
+                        }
+                    }
+                }
+                
+                if(empty($_SESSION["cart_item"])){
+                    unset($_SESSION["cart_item"]);
+                }
+                break;
+
             // Empty product to basket.
             case "empty":
                 unset($_SESSION["cart_item"]);
@@ -93,28 +114,27 @@
             // Confirm data to database.
             case "confirm":
                 // Variable Check 
-                $check = FALSE;
+                $check = TRUE;
                 // Check amount of each basket with amount of product in database.
-                foreach($_SESSION["cart_item"] as $k => $v){
-                    $result = $conn->query("SELECT * FROM product");
-                    while ($product = $result->fetch_assoc()){
-                        if ($_SESSION["cart_item"][$k]["pid"] == $product["pid"]){
-                            if($_SESSION["cart_item"][$k]["quantity"] > $product["pamount"]){
-                                // Quantity more than Amount.
-                                echo "<script>";
-                                $s = "ยอดสินค้ามีไม่พอ";
-                                echo "alert(\" $s\");";
-                                echo "</script>";
-                                $check = FALSE;
-                                break;
-                            }else{
-                                // Quantity less than Amount.
-                                $check = TRUE;
+                if(!empty($_SESSION["cart_item"])){
+                    foreach($_SESSION["cart_item"] as $k => $v){
+                        $result = $conn->query("SELECT * FROM product");
+                        while ($product = $result->fetch_assoc()){
+                            if ($_SESSION["cart_item"][$k]["pid"] == $product["pid"]){
+                                if($_SESSION["cart_item"][$k]["quantity"] > $product["pamount"]){
+                                    // Quantity more than Amount.
+                                    echo "<script>";
+                                    $s = "ยอดสินค้ามีไม่พอ";
+                                    echo "alert(\" $s\");";
+                                    echo "</script>";
+                                    $check = FALSE;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-
+                
                 // Quantity less than Amount.
                 if($check == TRUE){
                     if(!empty($_SESSION["cart_item"])){
@@ -151,7 +171,7 @@
                     // Quantity more than Amount.
                     break;
                 }
-            // Log out 
+            // History
             case "userhistory":
                 // Send Id user.
                 $_SESSION["userid"] = $userID;
@@ -194,7 +214,7 @@
     <!-- Import style_store.css -->
     <!-- Import styple_user.css -->
     <link rel="stylesheet" href="css/style_store.css">
-    <link rel="stylesheet" href="css/style_user.css">
+    <link rel="stylesheet" href="css/style_customer.css">
 
 </head>
 
@@ -229,16 +249,16 @@
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
-                    
-                        <div class="profile-userbuttons">
-                        <form action="customer.php?action=logout" method="post">
-                            <input type="submit" class="btn btn-danger btn-sm" value="LOG OUT">
-                            </form>
-                        </div>
 
                         <div class="profile-userbuttons">
                         <form action="customer.php?action=userhistory" method="post">
                             <input type="submit" class="btn btn-danger btn-sm" value="History">
+                            </form>
+                        </div>
+
+                        <div class="profile-userbuttons">
+                        <form action="customer.php?action=logout" method="post">
+                            <input type="submit" class="btn btn-danger btn-sm" value="LOG OUT">
                             </form>
                         </div>
                     
@@ -267,14 +287,15 @@
                             $total_price = 0;
                     ?>
 
-                    <table class="table-basket" cellpadding="10" cellspacting="1">
+                    <table class="table-basket" cellpadding="10" cellspacting="1" method="post">
                         <tbody>
-                            <tr>
+                            <tr class="header-title-table">
                                 <th style="text-align: center;" width="15%">Name</th>
                                 <th style="text-align: center;" width="15%">Code</th>
                                 <th style="text-align: right;" width="15%">Amount</th>
                                 <th style="text-align: right;" width="15%">Unit Price</th>
                                 <th style="text-align: center;" width="15%">Price</th>
+                                <th style="text-align: center;" width="15%">Remove</th>
                             </tr>
                                 <?php
                                     foreach($_SESSION["cart_item"] as $item){
@@ -286,6 +307,7 @@
                                 <td style="text-align: right;"><?php echo $item["quantity"];?></td>
                                 <td style="text-align: right;"><?php echo $item["pprice"] . " $";?></td>
                                 <td style="text-align: center;"><?php echo number_format($item_price,2) . " $";?></td>
+                                <td style="text-align: center;"><a href="customer.php?action=remove&pid=<?php echo $item["pid"] ?>"><img src="picture/delete.png" alt="picture-delete" width="15px"></a></td>
                             </tr>
 
                             <?php
@@ -326,6 +348,10 @@
                         $product_array = $db_handle->runQuery("SELECT * FROM product ORDER BY pid ASC");
                         if(!empty($product_array)){
                             foreach($product_array as $key => $value){
+                                // Select sfname by pId of product.
+                                $dataSellerByKey = $conn->query("SELECT * FROM seller WHERE sid = ".$product_array[$key]["sid"]."");
+                                $rowSeller = $dataSellerByKey->fetch_assoc();
+                                // pamount is not empty.
                                 if($product_array[$key]["pamount"] > 0){
                     ?>
                     <div class="col hp">
@@ -336,18 +362,18 @@
                             <div class="card-body">
                                 <!-- Price Product -->
                                 <div class="clearfix mb-3">
-                                    <span class="float-start badge rounded-pill bg-success"><?php echo $product_array[$key]["pprice"];?></span>
+                                    <span class="float-start badge rounded-pill bg-success"><?php echo $product_array[$key]["pname"];?></span>
                                 </div>
                                 <!-- Name Product -->
                                 <h5 class="card-title">
-                                    <a ><?php echo $product_array[$key]["pname"];?></a>
+                                    <a ><?php echo "ราคา ".$product_array[$key]["pprice"];?></a>
                                 </h5>
                                 <!-- Amount Product -->
                                 <h5 class="amount-title">
                                     <a >เหลือ <?php echo $product_array[$key]["pamount"];?></a>
                                 </h5>
                                 <h5 class="seller-title">
-                                    <a >ร้าน <?php echo $product_array[$key]["sid"];?></a>
+                                    <a >ขายโดยพ่อค้า <?php echo $rowSeller["sfname"];?></a>
                                 </h5>
                                 <!-- Add Product to baskest -->
                                 <div class="d-grid gap-2 my-4">

@@ -18,18 +18,10 @@
     </header>
 
     <div id="invoice-POS">
-    <center id="top" >
-        
-    <div class="logo"></div>
-        <div class="info"> 
-        <h2>ONLINE STORE</h2>
-        </div><!--End Info-->
-        
-    </center><!--End InvoiceTop-->
 
     <div id="mid" >
         <div class="info">
-        <h2>Contact Info</h2>
+        <h2>BILL </h2>
         
         <p> 
             <?php
@@ -85,10 +77,7 @@
             </table>
             </div><!--End Table-->
             <a class = "button" href="customer.php">BACK </a>
-            <div id="legalcopy" >
-            <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days </br>please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
-            </p>
-            </div>
+            <div id="legalcopy" ></div>
 </div><!--End InvoiceBot-->
     </div><!--End Invoice-->
     
