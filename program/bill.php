@@ -12,10 +12,6 @@
     <link rel = 'stylesheet' href = 'css/style_bill.css'>
 </head>
 <body>
-    <header class = "top-header" style = "font-family: Times New Roman">
-        <a class = "menu-item" href="#">Home </a>
-        <a class = "menu-item" href="#">Product </a>
-    </header>
 
     <div id="invoice-POS">
 
@@ -25,7 +21,7 @@
         
         <p> 
             <?php
-                session_start();
+                echo "Bill ID : ".$_SESSION['billID']."<br>";
                 echo "User ID : ".$_SESSION['userID']."<br>";
                 echo "Customer Name : ".$_SESSION['customername']."<br>";
                 echo "Phone : ".$_SESSION['phone']."<br>";

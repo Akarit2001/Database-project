@@ -137,15 +137,7 @@
                 
                 // Quantity less than Amount.
                 if($check == TRUE){
-                    if(!empty($_SESSION["cart_item"])){
-                        // Sent data in store to bill.php
-                        $_SESSION["userID"] = $userID;
-                        $_SESSION["customername"] = $customername;
-                        $_SESSION["phone"] = $phone;
-                        $_SESSION["addr"] = $addr;
-                        $_SESSION["bill"] = $_SESSION["cart_item"];
-                        header("Location: /program/bill.php");
-                    }
+                    $billId ;
                     // Search pId then update amount of product.
                     if(!empty($_SESSION["cart_item"])){
                         foreach($_SESSION["cart_item"] as $item){   
@@ -159,10 +151,20 @@
                         $result = $conn->query("SELECT * FROM bill");
                         // Gen Bill Id.
                         $billId = $result->num_rows + 1;
+                        // insert data to database.
                         foreach($_SESSION["cart_item"] as $item){   
-                            // $conn->query("UPDATE product SET pamount = pamount - " . $_POST["quantity"] . " WHERE pid = " . $productBypId[0]["pid"] . " and sid = '" . $productBypId[0]["sid"] . "';");
-                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES (".$billId.",".$userID.",".$item['pid'].",".$item['quantity'].");");
+                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES ('" . $billId . "','" . $userID . "','" . $item['pid'] . "','" . $item['quantity'] . "')");
                         }
+                    }
+                    if(!empty($_SESSION["cart_item"])){
+                        // Sent data in store to bill.php
+                        $_SESSION["billID"] = $billId;
+                        $_SESSION["userID"] = $userID;
+                        $_SESSION["customername"] = $customername;
+                        $_SESSION["phone"] = $phone;
+                        $_SESSION["addr"] = $addr;
+                        $_SESSION["bill"] = $_SESSION["cart_item"];
+                        header("Location: /program/bill.php");
                     }
                     // Clear _SESSTION.
                     unset($_SESSION["cart_item"]);
@@ -210,12 +212,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+    
     <!-- Import style_store.css -->
     <!-- Import styple_user.css -->
+    <!-- Import styple_seller.css -->
     <link rel="stylesheet" href="css/style_store.css">
     <link rel="stylesheet" href="css/style_customer.css">
-
 </head>
 
 <!-- body -->
@@ -224,6 +226,8 @@
 
         <!-- Profile -->
             <div class="row profile">
+            <div class="text-header-profile">Profile</div>
+            <div class="text-header-basket">Basket</div>
                 <div class="col-md-3">
                     <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
@@ -246,6 +250,13 @@
                         <div class="profile-usertitle-address">
                             Address: <?php echo $addr ?>
                         </div>
+                        <div class="profile-usertitle-credit">
+                            Credit Template design : Jason Davis
+                            </br>
+                            Credit About Table Basket :
+                            </br>
+                            Patiphan Phengpao
+                        </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
@@ -261,7 +272,7 @@
                             <input type="submit" class="btn btn-danger btn-sm" value="LOG OUT">
                             </form>
                         </div>
-                    
+                        
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
@@ -276,8 +287,6 @@
             <!-- Area Basket -->
             <div class="basket">
                 <!-- ฺBasket-->
-                    <!-- Header Text of Basket -->
-                    <div class="text-header">ตะกร้าสินค้า</div>
                     <!-- Action Delete Basket -->
                     <a href="customer.php?action=empty" id="btnEmpty">Empty crt</a>
 
@@ -337,6 +346,9 @@
             </div>
             <!-- Area Basket -->
         </div>
+        
+        <!-- Head Text Product -->
+        <div class="text-header-product">Product</div>
 
         <!-- Product -->
         <div class="container">

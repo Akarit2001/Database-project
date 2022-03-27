@@ -46,11 +46,30 @@ td{
 }
 
 
-.text-header{
+.text-header-profile{
   padding: 10px;
-  color:#0676f7;
-  width: 100%;
-  border-bottom: 1px solid #f0f4f7;
+  margin: 0px;
+  text-align: center;
+  color:#1d82f5;
+  font-size: 30px;
+  width: 25%;
+}
+
+.text-header-basket{
+  padding: 10px;
+  margin: 0px;
+  text-align: center;
+  color:#1d82f5;
+  font-size: 30px;
+  width: 75%;
+}
+
+.text-header-product{
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  color:#1d82f5;
+  font-size: 30px;
 }
 
 #btnEmpty{
@@ -154,6 +173,13 @@ body {
 
 .profile-usertitle-gmail {
   text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.profile-usertitle-credit{
   color: #5b9bd1;
   font-size: 12px;
   font-weight: 600;

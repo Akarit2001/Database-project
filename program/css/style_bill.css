@@ -54,11 +54,9 @@
 
   #mid{
     padding: 5px;
-    border-bottom: 1px solid rgb(143, 139, 139);
   }
 
   #bot{
-    border-bottom: 1px solid rgb(0, 0, 0);
     margin-top: 15px;
     height: 80%;
   }
