@@ -14,29 +14,9 @@ session_start();
 </head>
 
 <body>
-<<<<<<< HEAD
-
-    <div id="invoice-POS">
-
-    <div id="mid" >
-        <div class="info">
-        <h2>BILL </h2>
-        
-        <p> 
-            <?php
-                echo "Bill ID : ".$_SESSION['billID']."<br>";
-                echo "User ID : ".$_SESSION['userID']."<br>";
-                echo "Customer Name : ".$_SESSION['customername']."<br>";
-                echo "Phone : ".$_SESSION['phone']."<br>";
-                echo "ADDRESS : ".$_SESSION['addr']."<br>";
-            ?>
-            
-        </p>
-        
-=======
     <header class="top-header" style="font-family: Times New Roman">
-        <a class="menu-item" href="#">Home </a>
-        <a class="menu-item" href="#">Product </a>
+        <a class="menu-item" href="customer.php">Home </a>
+        <a class="menu-item" href="customer.php">Product </a>
     </header>
 
     <div id="invoice-POS">
@@ -57,7 +37,6 @@ session_start();
                 </p>
 
             </div>
->>>>>>> refs/remotes/origin/master
         </div>
         <!--End Invoice Mid-->
         <div id="bot">
