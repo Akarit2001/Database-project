@@ -20,8 +20,9 @@
     line-height: 2em;
   }
   .top-header{
-    
-    background-color: rgb(70, 69, 67);
+    background-color: #2FA4FF;
+    font-size: 1.5em;
+    box-shadow: 5px 10px #0E185F; 
   }
 
 

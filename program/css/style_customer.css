@@ -11,7 +11,7 @@ Licensed under MIT
   padding: 0;
   box-sizing: border-box;
   font-family: Arial;
-  color:#211a1a;
+  color: #211a1a;
   font-size: 0.9em;
 }
 
@@ -27,21 +27,22 @@ Licensed under MIT
   border-radius: 1rem;
 }
 
-.basket table{
+.basket table {
   background-color: #e7ecf1;
 }
 
-.table-basket{
+.table-basket {
   border-collapse: collapse;
   width: 100%;
 }
+
 /* table basket */
-.table-basket, tr, th, td{
+.table-basket, tr, th, td {
   border: #d3d2d2 1px solid;
   font-size: 0.4cm;
 }
 
-td{
+td {
   height: 20px;
 }
 
@@ -72,9 +73,9 @@ td{
   font-size: 30px;
 }
 
-#btnEmpty{
+#btnEmpty {
   background-color: #e7ecf1;
-  color:red;
+  color: red;
   float: right;
   padding: 5px 10px;
   text-decoration: none;
@@ -87,9 +88,9 @@ td{
   border-radius: 1rem;
 }
 
-.table-basket-submit{
+.table-basket-submit {
   background-color: #e7ecf1;
-  color:red;
+  color: red;
   float: right;
   padding: 5px 10px;
   text-decoration: none;
@@ -101,6 +102,7 @@ td{
   border: 0;
   border-radius: 1rem;
 }
+
 /* End basket */
 /* =================================== */
 
@@ -250,7 +252,7 @@ body {
 }
 
 /* =========== Edit ============= */
-.no-records{
+.no-records {
   text-align: center;
   clear: both;
   margin: 40px 0;
