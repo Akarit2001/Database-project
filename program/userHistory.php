@@ -134,7 +134,7 @@ if (!$_SESSION["cusID"]) {  //check session
                     "<p><b>วันที่ซื้อสินค้า : " . $row["time"]  . "</b></p>" .
                     '</div>
     <div style="margin-left:20px;">
-    <h2>receipt number : ' . $row["bid"] . '</h2>
+    <h2>เลขที่ ประวัติการสั่งซื้อ : ' . $row["bid"] . '</h2>
     </div>
 </div>
 
