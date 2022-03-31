@@ -18,6 +18,7 @@ $uid = 0;
 $cname = "";
 $cphone = "";
 $cadrr = "";
+
 if (!$_SESSION["cusID"]) {  //check session
     Header("Location: ./customer.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
 } else {
@@ -106,7 +107,7 @@ if (!$_SESSION["cusID"]) {  //check session
     <?php
     if ($status = 1) {
         $cid = $_SESSION["cusID"];
-        $sql = "SELECT bid FROM bill WHERE cid = " . $cid . " GROUP BY bid;";
+        $sql = "SELECT bid,time FROM bill WHERE cid = " . $cid . " GROUP BY bid,time;";
         $cusAllbid = $conn->query($sql);
         if ($cusAllbid->num_rows > 0) {
 
@@ -130,6 +131,7 @@ if (!$_SESSION["cusID"]) {  //check session
                     "<p>Customer Name : " . $cname . "</p>" .
                     "<p>Phone : " . $cphone  . "</p>" .
                     "<p>ADDRESS : " . $cadrr  . "</p>" .
+                    "<p><b>วันที่ซื้อสินค้า : " . $row["time"]  . "</b></p>" .
                     '</div>
     <div style="margin-left:20px;">
     <h2>receipt number : ' . $row["bid"] . '</h2>
@@ -138,7 +140,6 @@ if (!$_SESSION["cusID"]) {  //check session
 
 <!--End Invoice Mid-->
 <div id="bot">
-    
     <div id="table">
         <table>
 

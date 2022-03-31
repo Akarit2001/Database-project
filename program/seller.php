@@ -40,7 +40,7 @@ if (!$_SESSION["UserID"]) {  //check session
 // query data แสดงสินค้า
 $sql = "SELECT * FROM product where sid = " . $selerID . ";";
 // query data ประวัติการเพิ่มสินค้า
-$sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
+$sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount,addproduct.pid,atime FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
 
 $result = $conn->query($sql);
 $result2 = $conn->query($sql2);
@@ -52,19 +52,30 @@ $sql = "SELECT * FROM product where sid = " . $selerID . ";";
 if (isset($_POST["pname"]) && isset($_POST["price"])) {
     $pname = $_POST["pname"];
     $price = $_POST["price"];
-    $pamount = 0;
-    $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamount);
-    $sqlInsert = "INSERT INTO product (sid,pname, pprice,pamount ) VALUES " . $mstr;
-    if ($conn->query($sqlInsert)) {
-        header("Refresh:0; url=seller.php"); //reload page
+    $checkProduct = "select * from product where pname = '".$pname ."';";
+    $cpppp = $conn->query($checkProduct);
+    if($cpppp->num_rows == 0){
+        $pamount = 0;
+        $mstr = sprintf("('%u', '%s', '%u','%u');", $selerID, $pname, $price, $pamount);
+        $sqlInsert = "INSERT INTO product (sid,pname, pprice,pamount ) VALUES " . $mstr;
+        if ($conn->query($sqlInsert)) {
+            header("Refresh:0; url=seller.php"); //reload page
+        }
+    }else{
+        echo "<script>";
+        $s = "มีสินค้าชิ้นนี้แล้ว";
+        echo "alert(\" $s\");";
+        echo "window.history.back()";
+        echo "</script>";
     }
 }
 // addmount
 if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apid = $_POST["apid"];
     $apamount = $_POST["addamout"];
-    $mstr = sprintf("('%s', '%s', '%u');", $selerID, $apid, $apamount);
-    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount) VALUES " . $mstr;
+    $timenow = date("Y-m-d",time());
+    $mstr = sprintf("('%s', '%s', '%u', '%s');", $selerID, $apid, $apamount,$timenow);
+    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount,atime) VALUES " . $mstr;
 
     $sqlAlt_product = "UPDATE product SET pamount = pamount +" . $apamount . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
     if ($conn->query($sqlAdd_addproduct) && $conn->query($sqlAlt_product)) {
@@ -113,13 +124,13 @@ if ($sres->num_rows > 0) {
     <link rel="stylesheet" href="css/style_seller.css">
     <!-- <link rel="stylesheet" href="css/style_main.css"> -->
     <style>
-        .inadd{
+        .inadd {
             color: black;
             margin: 13px auto;
-            padding:10px 10px;
+            padding: 10px 10px;
             width: 50%;
             border: none;
-            background-color:#FFF;
+            background-color: #FFF;
             border-radius: 20px !important;
         }
     </style>
@@ -265,18 +276,20 @@ if ($sres->num_rows > 0) {
                         <table id="customers">
                             <tr>
                                 <th>ID ประวัติการเพิ่มสินค้า</th>
+                                <th>ID สินค้า</th>
                                 <th>ชื่อสินค้า</th>
                                 <th>จำนวนที่ถูกเพิ่ม</th>
+                                <th>เวลาเพิ่ม</th>
                             </tr>
                             <?php
                             if ($result2->num_rows > 0) {
                                 // แสดงประวัติการเพิ่มสินค้า
                                 while ($row = $result2->fetch_assoc()) {
-                                    $str = '<tr><td>' . $row['aid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['addAmount']   . '</td></tr>';
+                                    $str = '<tr><td>' . $row['aid'] . '</td><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['addAmount']   . '</td><td>' . $row['atime']   . '</td></tr>';
                                     echo $str;
                                 }
                             } else {
-                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
+                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
                             }
                             ?>
                         </table>
@@ -289,6 +302,7 @@ if ($sres->num_rows > 0) {
                                 <th>ชื่อสินค้า</th>
                                 <th>ราคา</th>
                                 <th>ยอดขาย</th>
+                                <th>เวลาที่ขาย</th>
                                 <th>รวมจำนวนเงิน $</th>
                             </tr>
                             <?php
@@ -300,14 +314,15 @@ if ($sres->num_rows > 0) {
 
                                 while ($rowt = $result4->fetch_assoc()) {
                                     // query data รายการสินค้าที่ถูกซื้อ
-                                    $sql3 = "SELECT bill.pid,product.pname,SUM(bill.bamount) sumAmount,product.pprice,product.pprice*SUM(bill.bamount) sellTotal FROM bill,product 
+                                    $sql3 = "SELECT bill.pid,product.pname,SUM(bill.bamount) sumAmount,product.pprice,product.pprice*SUM(bill.bamount) sellTotal,bill.time FROM bill,product 
                                     WHERE bill.pid = product.pid AND bill.pid =" . $rowt['pid'] . " 
-                                    GROUP BY bill.pid,product.pprice,product.pname";
+                                    GROUP BY bill.pid,product.pprice,product.pname,bill.time
+                                    ORDER BY bill.time";
                                     $result3 = $conn->query($sql3);
                                     if ($result3->num_rows > 0) {
                                         // แสดงรายการสินค้าที่ถูกซื้อ
                                         while ($row = $result3->fetch_assoc()) {
-                                            $str = '<tr><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['pprice'] . '</td><td>' . $row['sumAmount']   . '</td><td>' . $row['sellTotal'] . '</td></tr>';
+                                            $str = '<tr><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['pprice'] . '</td><td>' . $row['sumAmount']   . '</td><td>' . $row['time'] . '</td><td>' . $row['sellTotal'] . '</td></tr>';
                                             // $str = "ssss";
                                             $sumsell = $sumsell + $row['sellTotal'];
                                             echo $str;
@@ -315,7 +330,7 @@ if ($sres->num_rows > 0) {
                                     }
                                 }
                             }
-                            echo "<tr><td colspan='4'>รวมจำนวนเงินทั้งหมด</td><td>" . $sumsell . "</td></tr>";
+                            echo "<tr><td colspan='5'>รวมจำนวนเงินทั้งหมด</td><td>" . $sumsell . "</td></tr>";
                             ?>
                         </table>
                     </div>

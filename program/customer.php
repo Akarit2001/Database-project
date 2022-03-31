@@ -153,7 +153,7 @@
                         $billId = $result->num_rows + 1;
                         // insert data to database.
                         foreach($_SESSION["cart_item"] as $item){   
-                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount) VALUES ('" . $billId . "','" . $userID . "','" . $item['pid'] . "','" . $item['quantity'] . "')");
+                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount,time) VALUES ('" . $billId . "','" . $userID . "','" . $item['pid'] . "','" . $item['quantity'] . "','".date("Y-m-d",time())."')");
                         }
                     }
                     if(!empty($_SESSION["cart_item"])){
@@ -264,7 +264,7 @@
 
                         <div class="profile-userbuttons">
                         <form action="customer.php?action=userhistory" method="post">
-                            <input type="submit" class="btn btn-danger btn-sm" value="History">
+                            <input type="submit" class="btn btn-primary btn-sm" value="History">
                             </form>
                         </div>
 

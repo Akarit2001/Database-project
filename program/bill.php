@@ -27,7 +27,7 @@ session_start();
 
                 <p>
                     <?php
-                    session_start();
+                    // session_start();
                     echo "User ID : " . $_SESSION['userID'] . "<br>";
                     echo "Customer Name : " . $_SESSION['customername'] . "<br>";
                     echo "Phone : " . $_SESSION['phone'] . "<br>";
