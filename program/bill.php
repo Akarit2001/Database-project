@@ -29,6 +29,7 @@ session_start();
                     <?php
                     // session_start();
                     echo "User ID : " . $_SESSION['userID'] . "<br>";
+                    echo "Time Bill : ". date("Y-m-d",time())."<br>";
                     echo "Customer Name : " . $_SESSION['customername'] . "<br>";
                     echo "Phone : " . $_SESSION['phone'] . "<br>";
                     echo "ADDRESS : " . $_SESSION['addr'] . "<br>";

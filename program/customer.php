@@ -152,8 +152,9 @@
                         // Gen Bill Id.
                         $billId = $result->num_rows + 1;
                         // insert data to database.
+                        $timeBill = date("Y-m-d",time());
                         foreach($_SESSION["cart_item"] as $item){   
-                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount,time) VALUES ('" . $billId . "','" . $userID . "','" . $item['pid'] . "','" . $item['quantity'] . "','".date("Y-m-d",time())."')");
+                            $conn->query("INSERT INTO bill (bid,cid,pid,bamount,time) VALUES ('" . $billId . "','" . $userID . "','" . $item['pid'] . "','" . $item['quantity'] . "','".$timeBill."')");
                         }
                     }
                     if(!empty($_SESSION["cart_item"])){
@@ -164,6 +165,7 @@
                         $_SESSION["phone"] = $phone;
                         $_SESSION["addr"] = $addr;
                         $_SESSION["bill"] = $_SESSION["cart_item"];
+                        $_SESSION['time'] = $timeBill;
                         header("Location: /program/bill.php");
                     }
                     // Clear _SESSTION.
