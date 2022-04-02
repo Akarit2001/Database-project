@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill</title>
+    <title>รวมยอดรายการสั่งซื้อ</title>
     <link rel='stylesheet' href='css/style_bill.css'>
 </head>
 
@@ -23,13 +23,13 @@ session_start();
 
         <div id="mid">
             <div class="info">
-                <h2>BILL </h2>
+                <h2>รวมยอดรายการสั่งซื้อ </h2>
 
                 <p>
                     <?php
                     // session_start();
                     echo "User ID : " . $_SESSION['userID'] . "<br>";
-                    echo "Time Bill : ". date("Y-m-d",time())."<br>";
+                    echo "Time Buy : ". date("Y-m-d",time())."<br>";
                     echo "Customer Name : " . $_SESSION['customername'] . "<br>";
                     echo "Phone : " . $_SESSION['phone'] . "<br>";
                     echo "ADDRESS : " . $_SESSION['addr'] . "<br>";

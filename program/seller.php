@@ -74,8 +74,9 @@ if (isset($_POST["addamout"]) && isset($_POST["apid"])) {
     $apid = $_POST["apid"];
     $apamount = $_POST["addamout"];
     $timenow = date("Y-m-d",time());
-    $mstr = sprintf("('%s', '%s', '%u', '%s');", $selerID, $apid, $apamount,$timenow);
-    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount,atime) VALUES " . $mstr;
+    $addperson = $_POST["addperson"];
+    $mstr = sprintf("('%s', '%s', '%u', '%s','%s');", $selerID, $apid, $apamount,$timenow,$addperson);
+    $sqlAdd_addproduct = "INSERT INTO addproduct (sid, pid,addAmount,atime,addperson) VALUES " . $mstr;
 
     $sqlAlt_product = "UPDATE product SET pamount = pamount +" . $apamount . " WHERE pid = " . $apid . " and sid = '" . $selerID . "';";
     if ($conn->query($sqlAdd_addproduct) && $conn->query($sqlAlt_product)) {
@@ -213,7 +214,7 @@ if ($sres->num_rows > 0) {
                 <div class="profile-content">
                     <form class="fcss" action="" method="POST" enctype="multipart/form-data" name="addproduct">
                         <fieldset>
-                            <legend>Addproduct</legend>
+                            <legend>Add New Product</legend>
                             <div>
                                 <label class="lfm" for="pName">PName:</label>
                                 <input class="inadd" id="pName" type="text" placeholder="Product name" name="pname" required>
@@ -241,6 +242,11 @@ if ($sres->num_rows > 0) {
                             <div>
                                 <label class="lfm" for="addamout">Amout: </label>
                                 <input class="inadd" id="addamout" type="number" min="1" placeholder="จำนวนสินค้าที่ต้องการเพิ่ม" name="addamout" required>
+                            </div>
+                            <hr>
+                            <div>
+                                <label class="lfm" for="addperson">Person: </label>
+                                <input class="inadd" id="addperson" type="text" placeholder="ผู้ใช้งานที่เพิ่มจำนวนสินค้า" name="addperson" required>
                             </div>
                         </fieldset>
                         <div class="div_btn">

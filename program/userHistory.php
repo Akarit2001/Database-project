@@ -204,10 +204,7 @@ if (!$_SESSION["cusID"]) {  //check session
     </div>
     <!--End Table-->
     <a class="button btb" href="customer.php">BACK </a>
-    <div id="legalcopy">
-        <p class="legal"><strong>Thank you for your business!</strong> Payment is expected within 31 days </br>please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
-        </p>
-    </div>
+    <div id="legalcopy"></div>
 </div>
 <!--End InvoiceBot-->
 </div>';
