@@ -40,7 +40,7 @@ if (!$_SESSION["UserID"]) {  //check session
 // query data แสดงสินค้า
 $sql = "SELECT * FROM product where sid = " . $selerID . ";";
 // query data ประวัติการเพิ่มสินค้า
-$sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount,addproduct.pid,atime FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
+$sql2 = "SELECT addproduct.aid,product.pname,addproduct.addAmount,addproduct.pid,atime,addperson FROM addproduct,product WHERE addproduct.sid = " . $selerID . " AND addproduct.pid = product.pid;";
 
 $result = $conn->query($sql);
 $result2 = $conn->query($sql2);
@@ -286,16 +286,17 @@ if ($sres->num_rows > 0) {
                                 <th>ชื่อสินค้า</th>
                                 <th>จำนวนที่ถูกเพิ่ม</th>
                                 <th>เวลาเพิ่ม</th>
+                                <th>ผู้เพิ่มจำนวน</th>
                             </tr>
                             <?php
                             if ($result2->num_rows > 0) {
                                 // แสดงประวัติการเพิ่มสินค้า
                                 while ($row = $result2->fetch_assoc()) {
-                                    $str = '<tr><td>' . $row['aid'] . '</td><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['addAmount']   . '</td><td>' . $row['atime']   . '</td></tr>';
+                                    $str = '<tr><td>' . $row['aid'] . '</td><td>' . $row['pid'] . '</td><td>' . $row['pname'] . '</td><td>' . $row['addAmount']   . '</td><td>' . $row['atime']   . '</td><td>' . $row['addperson']   . '</td></tr>';
                                     echo $str;
                                 }
                             } else {
-                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
+                                echo "<tr><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td><td>ไม่มีข้อมูล</td></tr>";
                             }
                             ?>
                         </table>
